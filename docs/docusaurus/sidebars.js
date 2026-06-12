@@ -3,6 +3,7 @@ const sidebars = {
   docs: [
     "intro",
     "quickstart",
+    "architecture",
     {
       type: "category",
       label: "Plugins",

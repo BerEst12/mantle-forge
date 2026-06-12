@@ -30,7 +30,7 @@ Do not build another agent runtime. Ship **plugins** that give any coding agent 
 - **Hooks** — session env check for `MANTLE_FORGE_ROOT`
 - **Hermes only:** native Python tools (`mantle_scaffold`, …)
 
-Details: [Plugins overview](./plugins/) · Per-runtime: [Install Hermes](./plugins/install-hermes) · [Skills](./skills) · [CLI tools](./tools)
+Details: [Architecture](./architecture) · [Plugins overview](./plugins/) · Per-runtime: [Install Hermes](./plugins/install-hermes) · [Skills](./skills) · [CLI tools](./tools)
 
 ## Flagship workflow
 
