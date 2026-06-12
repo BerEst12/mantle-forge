@@ -4,7 +4,7 @@
 const config = {
   title: "Mantle Forge",
   tagline: "Mantle execution layer for coding agents.",
-  url: "https://mantle-forge.vercel.app",
+  url: "https://mantle-forge-0.vercel.app",
   baseUrl: "/",
   onBrokenLinks: "throw",
   organizationName: "mantle-forge",

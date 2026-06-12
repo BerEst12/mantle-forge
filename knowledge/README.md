@@ -1,6 +1,6 @@
 # Knowledge base
 
-Reference material for Mantle Forge agents and maintainers. User-facing docs live in [`docs/`](../docs/) (Docusaurus site at [mantle-forge.vercel.app](https://mantle-forge.vercel.app)).
+Reference material for Mantle Forge agents and maintainers. User-facing docs live in [`docs/`](../docs/) (Docusaurus site at [mantle-forge-0.vercel.app](https://mantle-forge-0.vercel.app)).
 
 ## Index
 

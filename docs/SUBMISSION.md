@@ -3,7 +3,7 @@
 **Event:** [Turing Test Hackathon 2026](https://dorahacks.io/hackathon/mantleturingtesthackathon2026) — Phase 2, AI DevTools  
 **Deadline:** 2026-06-15  
 **Repo:** `mantle-forge` (GitHub)  
-**Live docs:** [mantle-forge.vercel.app](https://mantle-forge.vercel.app)
+**Live docs:** [mantle-forge-0.vercel.app](https://mantle-forge-0.vercel.app)
 
 ## One-liner
 
@@ -65,9 +65,9 @@ Artifacts: [`examples/demo-runs/2026-06-05-hermes-desktop/`](../examples/demo-ru
 
 | Resource | URL |
 |----------|-----|
-| **Docs site** | https://mantle-forge.vercel.app |
-| **Quickstart** | https://mantle-forge.vercel.app/docs/quickstart |
-| **Plugins** | https://mantle-forge.vercel.app/docs/plugins |
+| **Docs site** | https://mantle-forge-0.vercel.app |
+| **Quickstart** | https://mantle-forge-0.vercel.app/docs/quickstart |
+| **Plugins** | https://mantle-forge-0.vercel.app/docs/plugins |
 | **GitHub** | https://github.com/BerEst12/mantle-forge |
 | **TokenVault (Sepolia, latest)** | https://sepolia.mantlescan.xyz/address/0x64D825eDcE57d56365bEb026CEAe4D2D439f7874 |
 | **Architecture visual** | https://github.com/BerEst12/mantle-forge/blob/main/docs/architecture-visual.html |

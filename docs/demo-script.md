@@ -154,7 +154,7 @@ deploy it to Mantle Sepolia, and generate an engineering report.
 
 1. Cursor → Agent panel, Mantle Forge skills visible
 2. Claude Code TUI → `mantle-*` skills listed
-3. Docs runtime table: <https://mantle-forge.vercel.app/docs/plugins>
+3. Docs runtime table: <https://mantle-forge-0.vercel.app/docs/plugins>
 
 ```bash
 npm run plugin:cursor
@@ -172,7 +172,7 @@ npm run plugin:codex     # + openclaw, opencode
 
 ### 5a — Anatomy (~25 s)
 
-**On screen:** editor sidebar expanding `plugins/mantle-forge/`, then docs Skills page scroll: <https://mantle-forge.vercel.app/docs/skills>
+**On screen:** editor sidebar expanding `plugins/mantle-forge/`, then docs Skills page scroll: <https://mantle-forge-0.vercel.app/docs/skills>
 
 ```text
 plugins/mantle-forge/
@@ -295,7 +295,7 @@ Then: GitHub repo → docs homepage → end card.
 | Label | URL |
 |-------|-----|
 | GitHub | https://github.com/BerEst12/mantle-forge |
-| Docs | https://mantle-forge.vercel.app |
+| Docs | https://mantle-forge-0.vercel.app |
 | Sepolia proof | https://sepolia.mantlescan.xyz/address/0x64D825eDcE57d56365bEb026CEAe4D2D439f7874 |
 
 ---

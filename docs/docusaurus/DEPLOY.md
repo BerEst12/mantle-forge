@@ -21,10 +21,10 @@ After deploy, check:
 
 | Page | URL |
 |------|-----|
-| Homepage (Supported Agents) | https://mantle-forge.vercel.app/ |
-| Plugins overview | https://mantle-forge.vercel.app/docs/plugins/ |
-| Install Hermes | https://mantle-forge.vercel.app/docs/plugins/install-hermes |
-| Introduction | https://mantle-forge.vercel.app/docs/intro |
+| Homepage (Supported Agents) | https://mantle-forge-0.vercel.app/ |
+| Plugins overview | https://mantle-forge-0.vercel.app/docs/plugins/ |
+| Install Hermes | https://mantle-forge-0.vercel.app/docs/plugins/install-hermes |
+| Introduction | https://mantle-forge-0.vercel.app/docs/intro |
 
 Navbar must show: **Docs · Plugins · Quickstart · Skills · Tools · Demo**
 
@@ -34,7 +34,7 @@ Sidebar under **Plugins** must list six install guides.
 
 1. **Vercel dashboard** → latest deployment → status must be **Ready** (not Error).
 2. **Hard refresh** browser: `Ctrl+Shift+R` (Windows) or empty cache.
-3. Confirm URL is `mantle-forge.vercel.app` (not an old preview URL).
+3. Confirm URL is `mantle-forge-0.vercel.app` (not an old preview URL).
 4. **Redeploy** → Deployments → ⋮ → Redeploy (with "Use existing build cache" **unchecked**).
 
 ## Run locally (must match Vercel)

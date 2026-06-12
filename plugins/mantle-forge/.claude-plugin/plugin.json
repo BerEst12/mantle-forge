@@ -3,7 +3,7 @@
   "description": "Mantle smart-contract DevOps — scaffold, test, harden, deploy Sepolia, report",
   "version": "1.0.0",
   "author": { "name": "Mantle Forge" },
-  "homepage": "https://mantle-forge.vercel.app",
+  "homepage": "https://mantle-forge-0.vercel.app",
   "repository": {
     "type": "git",
     "url": "https://github.com/BerEst12/mantle-forge.git"

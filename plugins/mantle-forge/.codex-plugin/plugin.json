@@ -6,7 +6,7 @@
     "name": "Mantle Forge",
     "url": "https://github.com/BerEst12/mantle-forge"
   },
-  "homepage": "https://mantle-forge.vercel.app",
+  "homepage": "https://mantle-forge-0.vercel.app",
   "repository": "https://github.com/BerEst12/mantle-forge",
   "license": "MIT",
   "keywords": ["mantle", "hardhat", "solidity", "deploy", "sepolia"],

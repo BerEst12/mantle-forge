@@ -6,7 +6,7 @@ Mantle-native engineering toolkit for coding agents. Skills, deterministic CLI t
 
 [![Hackathon](https://img.shields.io/badge/Turing_Test_2026-AI_DevTools-00D395)](https://dorahacks.io/hackathon/mantleturingtesthackathon2026)
 [![Network](https://img.shields.io/badge/Network-Mantle_Sepolia-111827)](https://docs.mantle.xyz/network/for-developers/quick-access)
-[![Agents](https://img.shields.io/badge/Agents-Hermes_·_Cursor_·_Codex_·_Claude_·_OpenClaw_·_OpenCode-22D3EE)](https://mantle-forge.vercel.app)
+[![Agents](https://img.shields.io/badge/Agents-Hermes_·_Cursor_·_Codex_·_Claude_·_OpenClaw_·_OpenCode-22D3EE)](https://mantle-forge-0.vercel.app)
 [![License](https://img.shields.io/badge/License-MIT-F5F5F5)](LICENSE)
 
 ---
@@ -24,7 +24,7 @@ npm install && npm run plugin:<your-runtime>   # see Installation below
 npm run plugin:verify
 ```
 
-Live docs: [mantle-forge.vercel.app](https://mantle-forge.vercel.app)
+Live docs: [mantle-forge-0.vercel.app](https://mantle-forge-0.vercel.app)
 
 ---
 
@@ -195,7 +195,7 @@ npx mantle-cos-upload ./my-vault --out reports/cos-upload.md
 
 #### DeFi data (read-only, no deploy)
 
-Prices, TVL, yields, lending, Merchant Moe pools/swap quotes, Mantlescan tx lookup, wallet overview — see [Skills docs](https://mantle-forge.vercel.app/docs/skills).
+Prices, TVL, yields, lending, Merchant Moe pools/swap quotes, Mantlescan tx lookup, wallet overview — see [Skills docs](https://mantle-forge-0.vercel.app/docs/skills).
 
 ### CLI tools
 
@@ -210,7 +210,7 @@ npx mantle-deploy ./my-vault --network mantleSepolia
 npx mantle-report ./my-vault --out FINAL_REPORT.md
 ```
 
-Test: `npm run test:tools` · Full catalog: [Tools docs](https://mantle-forge.vercel.app/docs/tools)
+Test: `npm run test:tools` · Full catalog: [Tools docs](https://mantle-forge-0.vercel.app/docs/tools)
 
 ### Also ships
 
