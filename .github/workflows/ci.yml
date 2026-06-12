@@ -31,9 +31,6 @@ jobs:
       - name: Install token-vault template deps
         run: npm ci --prefix templates/token-vault
 
-      - name: Install token-vault deps
-        run: npm ci --prefix token-vault
-
       - name: plugin:verify
         run: npm run plugin:verify
 
