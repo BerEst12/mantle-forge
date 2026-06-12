@@ -1,0 +1,17 @@
+{
+  "name": "mantle-forge",
+  "owner": {
+    "name": "Mantle Forge"
+  },
+  "metadata": {
+    "description": "Mantle smart-contract DevOps plugins for Cursor"
+  },
+  "plugins": [
+    {
+      "name": "mantle-forge",
+      "source": "./plugins/mantle-forge",
+      "description": "Mantle smart-contract DevOps — scaffold, test, harden, deploy Sepolia, report",
+      "version": "1.0.0"
+    }
+  ]
+}

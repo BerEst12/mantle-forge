@@ -1,0 +1,14 @@
+{
+  "name": "mantle-forge",
+  "version": "1.0.0",
+  "description": "Mantle smart-contract DevOps — scaffold, test, harden, deploy Sepolia, report",
+  "author": {
+    "name": "Mantle Forge",
+    "url": "https://github.com/BerEst12/mantle-forge"
+  },
+  "homepage": "https://mantle-forge.vercel.app",
+  "repository": "https://github.com/BerEst12/mantle-forge",
+  "license": "MIT",
+  "keywords": ["mantle", "hardhat", "solidity", "deploy", "sepolia"],
+  "skills": "./skills/"
+}

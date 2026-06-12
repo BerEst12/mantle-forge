@@ -1,0 +1,25 @@
+{
+  "name": "mantle-forge",
+  "private": true,
+  "workspaces": [
+    "installer",
+    "tools/*"
+  ],
+  "scripts": {
+    "test": "npm run test --workspaces --if-present",
+    "test:tools": "npm run test -w @mantle-forge/installer -w @mantle-forge/mantle-scaffold -w @mantle-forge/mantle-check -w @mantle-forge/mantle-report -w @mantle-forge/mantle-gas-report -w @mantle-forge/mantle-audit -w @mantle-forge/mantle-harden -w @mantle-forge/mantle-deploy -w @mantle-forge/mantle-scan -w @mantle-forge/mantle-moe -w @mantle-forge/mantle-tencent-audit -w @mantle-forge/mantle-cos-upload",
+    "build": "echo \"TODO: add monorepo build scripts\"",
+    "lint": "echo \"TODO: add lint scripts\"",
+    "plugin:cursor": "node installer/install-plugin.js --cursor --repo .",
+    "plugin:hermes": "node installer/install-plugin.js --hermes --repo .",
+    "plugin:codex": "node installer/install-plugin.js --codex --repo .",
+    "plugin:claude": "node installer/install-plugin.js --claude --repo .",
+    "plugin:openclaw": "node installer/install-plugin.js --openclaw --repo .",
+    "plugin:opencode": "node installer/install-plugin.js --opencode --repo .",
+    "plugin:verify": "node installer/verify-plugin.js --repo . --wsl",
+    "plugin:sync-skills": "node installer/install-plugin.js --sync-skills --repo ."
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

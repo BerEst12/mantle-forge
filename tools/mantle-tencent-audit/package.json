@@ -1,0 +1,12 @@
+{
+  "name": "@mantle-forge/mantle-tencent-audit",
+  "version": "0.0.0",
+  "private": true,
+  "description": "AI-powered deep security audit for Solidity contracts on Mantle — Tencent Cloud Hunyuan direct or via OpenRouter",
+  "bin": { "mantle-tencent-audit": "./cli.js" },
+  "main": "lib/tencent-audit.js",
+  "type": "commonjs",
+  "scripts": { "test": "node --test test/*.test.js" },
+  "dependencies": { "@mantle-forge/cli-utils": "0.0.0" },
+  "engines": { "node": ">=20" }
+}

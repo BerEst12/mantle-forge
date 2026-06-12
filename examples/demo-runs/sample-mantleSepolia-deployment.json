@@ -1,0 +1,22 @@
+{
+  "network": "mantleSepolia",
+  "chainId": 5003,
+  "deployer": "0xDdFE23C46269220feF396e9cDc42b10A3F306409",
+  "contracts": {
+    "DemoToken": {
+      "address": "0x4Bd40EFBcB8aAa21773a0e44630FEAd3d2D0435D",
+      "txHash": "0x78774e2363d302b9d88dd7105e3b6895df31b0ab3be16940907b1a8b91cdd80f"
+    },
+    "TokenVault": {
+      "address": "0xC313185923b2F0FB2795b9b55dB3e0B9D4865119",
+      "txHash": "0xb4c756244d1054a2e9734d113499a6632cfde1c8671b7cfc8609148032a644a2",
+      "constructorArgs": ["0x4Bd40EFBcB8aAa21773a0e44630FEAd3d2D0435D"]
+    }
+  },
+  "explorer": {
+    "tokenVault": "https://sepolia.mantlescan.xyz/address/0xC313185923b2F0FB2795b9b55dB3e0B9D4865119",
+    "demoToken": "https://sepolia.mantlescan.xyz/address/0x4Bd40EFBcB8aAa21773a0e44630FEAd3d2D0435D"
+  },
+  "deployedAt": "2026-05-29T19:24:19.054Z",
+  "_note": "Reference artifact from Hermes flagship demo — fallback for recorded demo"
+}

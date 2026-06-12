@@ -1,0 +1,12 @@
+{
+  "name": "@mantle-forge/mantle-gas-report",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Run Hardhat gas reporter and save reports/gas.md",
+  "bin": { "mantle-gas-report": "./cli.js" },
+  "main": "lib/gas-report.js",
+  "type": "commonjs",
+  "scripts": { "test": "node --test test/*.test.js" },
+  "dependencies": { "@mantle-forge/cli-utils": "0.0.0" },
+  "engines": { "node": ">=20" }
+}

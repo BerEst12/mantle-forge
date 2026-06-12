@@ -1,0 +1,14 @@
+{
+  "name": "mantle-forge",
+  "owner": {
+    "name": "Mantle Forge"
+  },
+  "plugins": [
+    {
+      "name": "mantle-forge",
+      "description": "Mantle smart-contract DevOps — scaffold, test, harden, deploy Sepolia, report",
+      "version": "1.0.0",
+      "source": "./plugins/mantle-forge"
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+[profile.default]
+src = "contracts"
+test = "forge-test"
+libs = ["lib", "node_modules"]
+solc = "0.8.24"
+optimizer = true
+optimizer_runs = 200
+
+remappings = [
+  "@openzeppelin/=node_modules/@openzeppelin/",
+  "forge-std/=lib/forge-std/src/"
+]
+
+[fuzz]
+runs = 512
+max_test_rejects = 65536
+
+[invariant]
+runs = 256
+depth = 50
+fail_on_revert = false

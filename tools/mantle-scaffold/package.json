@@ -1,0 +1,20 @@
+{
+  "name": "@mantle-forge/mantle-scaffold",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Scaffold Mantle-ready Hardhat projects from templates",
+  "bin": {
+    "mantle-scaffold": "./cli.js"
+  },
+  "main": "lib/scaffold.js",
+  "type": "commonjs",
+  "scripts": {
+    "test": "node --test test/*.test.js"
+  },
+  "dependencies": {
+    "@mantle-forge/cli-utils": "0.0.0"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

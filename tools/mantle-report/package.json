@@ -1,0 +1,20 @@
+{
+  "name": "@mantle-forge/mantle-report",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Generate FINAL_REPORT.md from Mantle project artifacts",
+  "bin": {
+    "mantle-report": "./cli.js"
+  },
+  "main": "lib/report.js",
+  "type": "commonjs",
+  "scripts": {
+    "test": "node --test test/*.test.js"
+  },
+  "dependencies": {
+    "@mantle-forge/cli-utils": "0.0.0"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

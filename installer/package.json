@@ -1,0 +1,20 @@
+{
+  "name": "@mantle-forge/installer",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Mantle Forge CLI installer (placeholder)",
+  "bin": {
+    "mantle-forge": "./cli.js"
+  },
+  "main": "cli.js",
+  "type": "commonjs",
+  "scripts": {
+    "test": "node --test test/*.test.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "@mantle-forge/cli-utils": "0.0.0"
+  }
+}

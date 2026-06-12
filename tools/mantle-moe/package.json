@@ -1,0 +1,22 @@
+{
+  "name": "@mantle-forge/mantle-moe",
+  "version": "0.0.0",
+  "private": true,
+  "description": "CLI tools for Merchant Moe DEX on Mantle — pools, best pool finder",
+  "bin": {
+    "mantle-moe-pools": "./cli-pools.js",
+    "mantle-moe-best-pool": "./cli-best-pool.js",
+    "mantle-moe-swap-quote": "./cli-swap-quote.js"
+  },
+  "main": "lib/moe.js",
+  "type": "commonjs",
+  "scripts": {
+    "test": "node --test test/*.test.js"
+  },
+  "dependencies": {
+    "@mantle-forge/cli-utils": "0.0.0"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

@@ -1,0 +1,17 @@
+name: mantle-forge
+version: 1.0.0
+description: Mantle smart-contract DevOps — scaffold, test, harden, deploy Sepolia, report
+provides_tools:
+  - mantle_scaffold
+  - mantle_check
+  - mantle_audit
+  - mantle_harden
+  - mantle_gas_report
+  - mantle_deploy
+  - mantle_report
+optional_env:
+  - name: MANTLE_SEPOLIA_RPC_URL
+    description: Mantle Sepolia RPC URL (required for mantle_deploy)
+  - name: MANTLE_PRIVATE_KEY
+    description: Sepolia test wallet private key (required for mantle_deploy)
+    secret: true

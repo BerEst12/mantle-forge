@@ -1,0 +1,17 @@
+{
+  "name": "mantle-forge-telegram-bot",
+  "version": "1.0.0",
+  "description": "Telegram demo bot for Mantle Forge — runs the full scaffold→deploy→report pipeline on demand",
+  "main": "bot.js",
+  "scripts": {
+    "start": "node bot.js",
+    "dev": "node --watch bot.js"
+  },
+  "dependencies": {
+    "telegraf": "^4.16.3",
+    "dotenv": "^16.4.5"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

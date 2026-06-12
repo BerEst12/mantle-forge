@@ -1,0 +1,12 @@
+{
+  "name": "@mantle-forge/mantle-cos-upload",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Upload Mantle Forge pipeline artifacts to Tencent Cloud COS for verifiable public sharing",
+  "bin": { "mantle-cos-upload": "./cli.js" },
+  "main": "lib/cos-upload.js",
+  "type": "commonjs",
+  "scripts": { "test": "node --test test/*.test.js" },
+  "dependencies": { "@mantle-forge/cli-utils": "0.0.0" },
+  "engines": { "node": ">=20" }
+}

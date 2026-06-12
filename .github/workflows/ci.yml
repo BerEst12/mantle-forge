@@ -1,0 +1,50 @@
+name: CI
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+    branches: [main]
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify-and-test:
+    name: Plugin verify + Tool tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install token-vault template deps
+        run: npm ci --prefix templates/token-vault
+
+      - name: Install token-vault deps
+        run: npm ci --prefix token-vault
+
+      - name: plugin:verify
+        run: npm run plugin:verify
+
+      - name: test:tools (installer + scaffold + check + report + gas)
+        run: npm run test -w @mantle-forge/installer -w @mantle-forge/mantle-scaffold -w @mantle-forge/mantle-check -w @mantle-forge/mantle-report -w @mantle-forge/mantle-gas-report
+
+      - name: test:tools (audit + harden)
+        run: npm run test -w @mantle-forge/mantle-audit -w @mantle-forge/mantle-harden
+
+      - name: test:tools (deploy + scan + moe)
+        run: npm run test -w @mantle-forge/mantle-deploy -w @mantle-forge/mantle-scan -w @mantle-forge/mantle-moe
+
+      - name: test:tools (tencent + cos)
+        run: npm run test -w @mantle-forge/mantle-tencent-audit -w @mantle-forge/mantle-cos-upload

@@ -1,0 +1,13 @@
+---
+description: Mantle Forge defaults — Sepolia network, CLI tools, security disclaimer
+globs:
+alwaysApply: true
+---
+
+# Mantle Forge
+
+- Default network: **Mantle Sepolia** (chainId 5003)
+- Use repo CLIs from `$MANTLE_FORGE_ROOT`: `npx mantle-scaffold`, `mantle-check`, `mantle-audit`, `mantle-gas-report`, `mantle-deploy`, `mantle-report`
+- Security reviews are **agent-assisted hardening**, not professional audits
+- Never commit `MANTLE_PRIVATE_KEY`; use project `.env` (gitignored)
+- Flagship workflow: see `commands/flagship-workflow.md`

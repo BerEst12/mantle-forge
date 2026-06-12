@@ -1,0 +1,37 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# Build / cache
+dist/
+build/
+coverage/
+.cache/
+.turbo/
+*.tsbuildinfo
+
+# Hardhat / Foundry
+artifacts/
+cache/
+typechain-types/
+out/
+
+# Reports (generated during demos)
+reports/
+FINAL_REPORT.md
+EXECUTION_LOG.md
+
+# Docusaurus
+docs/docusaurus/.docusaurus/
+docs/docusaurus/build/
+.docusaurus/
+
+# OS / IDE
+.DS_Store
+Thumbs.db
+*.log

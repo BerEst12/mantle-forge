@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="drawio-skill" version="26.0.0" type="device">
+  <diagram name="Mantle Forge — Full Architecture">
+    <mxGraphModel dx="1600" dy="1200" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="1600" pageHeight="1200" math="0" shadow="1">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- ═══════════════════════════════════════════════════════ -->
+        <!-- TIER 1 — CODING AGENTS                                  -->
+        <!-- ═══════════════════════════════════════════════════════ -->
+        <mxCell id="t1" value="TIER 1 — CODING AGENTS" style="swimlane;startSize=36;fillColor=#dae8fc;strokeColor=#6c8ebf;rounded=1;arcSize=4;html=1;fontSize=13;fontStyle=1;fontColor=#1a3a5c;" vertex="1" parent="1">
+          <mxGeometry x="60" y="30" width="1480" height="120" as="geometry" />
+        </mxCell>
+
+        <mxCell id="a1" value="⭐ Hermes&#xa;flagship" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1a3a5c;strokeColor=#00d4ff;fontColor=#ffffff;fontSize=11;fontStyle=1;arcSize=10;" vertex="1" parent="t1">
+          <mxGeometry x="20" y="45" width="120" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="a2" value="Cursor" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;" vertex="1" parent="t1">
+          <mxGeometry x="170" y="45" width="100" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="a3" value="Codex" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;" vertex="1" parent="t1">
+          <mxGeometry x="300" y="45" width="100" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="a4" value="Claude Code" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;" vertex="1" parent="t1">
+          <mxGeometry x="430" y="45" width="110" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="a5" value="OpenClaw" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;" vertex="1" parent="t1">
+          <mxGeometry x="570" y="45" width="100" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="a6" value="OpenCode" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;" vertex="1" parent="t1">
+          <mxGeometry x="700" y="45" width="100" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="a7" value="📚 Docusaurus&#xa;docs site" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#aaaaaa;fontColor=#555;fontSize=11;dashed=1;" vertex="1" parent="t1">
+          <mxGeometry x="870" y="45" width="120" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="a8" value="💬 Discord&#xa;Telegram" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#aaaaaa;fontColor=#555;fontSize=11;dashed=1;" vertex="1" parent="t1">
+          <mxGeometry x="1020" y="45" width="120" height="55" as="geometry" />
+        </mxCell>
+
+        <!-- ═══════════════════════════════════════════════════════ -->
+        <!-- TIER 2 — INSTALLER & ADAPTER                            -->
+        <!-- ═══════════════════════════════════════════════════════ -->
+        <mxCell id="t2" value="TIER 2 — INSTALLER &amp; ADAPTER" style="swimlane;startSize=36;fillColor=#ffe6cc;strokeColor=#d79b00;rounded=1;arcSize=4;html=1;fontSize=13;fontStyle=1;fontColor=#7d4e00;" vertex="1" parent="1">
+          <mxGeometry x="60" y="210" width="1480" height="120" as="geometry" />
+        </mxCell>
+
+        <mxCell id="b1" value="npm run plugin:&lt;vendor&gt;&#xa;install-plugin.js" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=11;" vertex="1" parent="t2">
+          <mxGeometry x="60" y="40" width="220" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="b2" value="npm run plugin:verify&#xa;verify-plugin.js" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=11;" vertex="1" parent="t2">
+          <mxGeometry x="320" y="40" width="220" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="b3" value="install.sh&#xa;legacy fallback" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=11;dashed=1;" vertex="1" parent="t2">
+          <mxGeometry x="580" y="40" width="180" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="b4" value="canonical skills + agents" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=11;fontStyle=1;" vertex="1" parent="t2">
+          <mxGeometry x="820" y="40" width="200" height="55" as="geometry" />
+        </mxCell>
+
+        <!-- ═══════════════════════════════════════════════════════ -->
+        <!-- TIER 3 — MANTLE FORGE PLUGINS                           -->
+        <!-- ═══════════════════════════════════════════════════════ -->
+        <mxCell id="t3" value="TIER 3 — MANTLE FORGE PLUGINS" style="swimlane;startSize=36;fillColor=#d5e8d4;strokeColor=#82b366;rounded=1;arcSize=4;html=1;fontSize=13;fontStyle=1;fontColor=#1e4d2b;" vertex="1" parent="1">
+          <mxGeometry x="60" y="390" width="1480" height="150" as="geometry" />
+        </mxCell>
+
+        <mxCell id="c1" value="plugins/mantle-forge&#xa;universal bundle" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;" vertex="1" parent="t3">
+          <mxGeometry x="20" y="45" width="190" height="75" as="geometry" />
+        </mxCell>
+        <mxCell id="c2" value="⭐ plugins/hermes-mantle-forge&#xa;Hermes native plugin" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1a3a5c;strokeColor=#00d4ff;fontColor=#ffffff;fontSize=11;fontStyle=1;" vertex="1" parent="t3">
+          <mxGeometry x="240" y="45" width="210" height="75" as="geometry" />
+        </mxCell>
+        <mxCell id="c3" value="7 Engineering Skills&#xa;scaffold·check·audit&#xa;gas·deploy·report·scan" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;" vertex="1" parent="t3">
+          <mxGeometry x="480" y="45" width="185" height="75" as="geometry" />
+        </mxCell>
+        <mxCell id="c4" value="17 DeFi Skills&#xa;prices·TVL·yields·lending&#xa;MoePools·scan·wallet" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=10;" vertex="1" parent="t3">
+          <mxGeometry x="695" y="45" width="185" height="75" as="geometry" />
+        </mxCell>
+        <mxCell id="c5" value="rules · hooks&#xa;commands · scripts" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;" vertex="1" parent="t3">
+          <mxGeometry x="910" y="45" width="160" height="75" as="geometry" />
+        </mxCell>
+        <mxCell id="c6" value="🚀 hermes/workflows&#xa;flagship demo path" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffd700;strokeColor=#b8860b;fontColor=#1a1a1a;fontSize=11;fontStyle=1;" vertex="1" parent="t3">
+          <mxGeometry x="1100" y="45" width="200" height="75" as="geometry" />
+        </mxCell>
+
+        <!-- ═══════════════════════════════════════════════════════ -->
+        <!-- TIER 4 — CLI EXECUTION LAYER                            -->
+        <!-- ═══════════════════════════════════════════════════════ -->
+        <mxCell id="t4" value="TIER 4 — CLI EXECUTION LAYER" style="swimlane;startSize=36;fillColor=#dae8fc;strokeColor=#6c8ebf;rounded=1;arcSize=4;html=1;fontSize=13;fontStyle=1;fontColor=#1a3a5c;" vertex="1" parent="1">
+          <mxGeometry x="60" y="600" width="1480" height="130" as="geometry" />
+        </mxCell>
+
+        <mxCell id="d1" value="mantle-scaffold" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;" vertex="1" parent="t4">
+          <mxGeometry x="20" y="45" width="140" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="d2" value="mantle-check" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;" vertex="1" parent="t4">
+          <mxGeometry x="180" y="45" width="130" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="d3" value="mantle-audit" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;" vertex="1" parent="t4">
+          <mxGeometry x="330" y="45" width="130" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="d4" value="mantle-gas-report" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;" vertex="1" parent="t4">
+          <mxGeometry x="480" y="45" width="150" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="d5" value="mantle-deploy" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;" vertex="1" parent="t4">
+          <mxGeometry x="650" y="45" width="130" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="d6" value="mantle-report" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;" vertex="1" parent="t4">
+          <mxGeometry x="800" y="45" width="130" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="d7" value="mantle-scan-*&#xa;mantle-moe-*" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;" vertex="1" parent="t4">
+          <mxGeometry x="950" y="45" width="140" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="d8" value="tools/&#xa;workspace CLIs" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#aaaaaa;fontColor=#555;fontSize=11;dashed=1;" vertex="1" parent="t4">
+          <mxGeometry x="1110" y="45" width="130" height="55" as="geometry" />
+        </mxCell>
+
+        <!-- ═══════════════════════════════════════════════════════ -->
+        <!-- TIER 5 — TEMPLATES & KNOWLEDGE                          -->
+        <!-- ═══════════════════════════════════════════════════════ -->
+        <mxCell id="t5" value="TIER 5 — TEMPLATES &amp; KNOWLEDGE" style="swimlane;startSize=36;fillColor=#e1d5e7;strokeColor=#9673a6;rounded=1;arcSize=4;html=1;fontSize=13;fontStyle=1;fontColor=#4a2070;" vertex="1" parent="1">
+          <mxGeometry x="60" y="790" width="1480" height="130" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e1" value="🗄 hardhat-mantle-starter&#xa;Hardhat template" style="shape=cylinder3;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=11;" vertex="1" parent="t5">
+          <mxGeometry x="60" y="35" width="180" height="75" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" value="🗄 token-vault template&#xa;DeFi starter" style="shape=cylinder3;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=11;" vertex="1" parent="t5">
+          <mxGeometry x="280" y="35" width="170" height="75" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" value="🗄 knowledge/&#xa;network config&#xa;Mantle Sepolia params" style="shape=cylinder3;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=11;" vertex="1" parent="t5">
+          <mxGeometry x="490" y="35" width="170" height="75" as="geometry" />
+        </mxCell>
+        <mxCell id="e4" value="Hardhat project&#xa;tests + contracts" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=11;" vertex="1" parent="t5">
+          <mxGeometry x="700" y="40" width="170" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="e5" value="📄 FINAL_REPORT.md&#xa;demo deliverable" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffd700;strokeColor=#b8860b;fontColor=#1a1a1a;fontSize=11;fontStyle=1;" vertex="1" parent="t5">
+          <mxGeometry x="920" y="40" width="180" height="65" as="geometry" />
+        </mxCell>
+
+        <!-- ═══════════════════════════════════════════════════════ -->
+        <!-- TIER 6 — MANTLE SEPOLIA (BLOCKCHAIN)                    -->
+        <!-- ═══════════════════════════════════════════════════════ -->
+        <mxCell id="t6" value="TIER 6 — MANTLE SEPOLIA (TESTNET)" style="swimlane;startSize=36;fillColor=#f5f5f5;strokeColor=#888888;rounded=1;arcSize=4;html=1;fontSize=13;fontStyle=1;fontColor=#555;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="60" y="980" width="1480" height="110" as="geometry" />
+        </mxCell>
+
+        <mxCell id="f1" value="⛓ RPC Endpoint&#xa;rpc.sepolia.mantle.xyz" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#888;fontSize=11;dashed=1;" vertex="1" parent="t6">
+          <mxGeometry x="160" y="35" width="200" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="f2" value="🔍 Mantlescan Explorer&#xa;explorer.sepolia.mantle.xyz" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#888;fontSize=11;dashed=1;" vertex="1" parent="t6">
+          <mxGeometry x="460" y="35" width="230" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="f3" value="📜 Deployed Contracts&#xa;tx hash · contract address" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#888;fontSize=11;dashed=1;" vertex="1" parent="t6">
+          <mxGeometry x="790" y="35" width="220" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="f4" value="Chain ID: 5003&#xa;Symbol: MNT" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#888;fontSize=11;dashed=1;" vertex="1" parent="t6">
+          <mxGeometry x="1110" y="35" width="170" height="55" as="geometry" />
+        </mxCell>
+
+        <!-- ═══════════════════════════════════════════════════════ -->
+        <!-- CONNECTORS                                               -->
+        <!-- ═══════════════════════════════════════════════════════ -->
+
+        <!-- Agents → Installer -->
+        <mxCell id="e10" value="orchestrate" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;fontSize=10;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.2;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="a1" target="b1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e11" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="a2" target="b1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e12" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.7;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="a3" target="b1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e13" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.3;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="a4" target="b2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e14" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="a5" target="b2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e15" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.7;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="a6" target="b2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Installer → Plugins -->
+        <mxCell id="e20" value="install" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;fontSize=10;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.15;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="b1" target="c1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e21" value="verify" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;fontSize=10;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="b2" target="c2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e22" value="sync" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;fontSize=10;dashed=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="b4" target="c1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Plugins → CLI -->
+        <mxCell id="e30" value="invoke" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;fontSize=10;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.1;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="c3" target="d1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e31" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="c3" target="d3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e32" value="DeFi calls" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;fontSize=10;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="c4" target="d7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e33" value="workflow" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;fontSize=10;strokeColor=#b8860b;fontColor=#b8860b;strokeWidth=2;flowAnimation=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.9;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="c6" target="d5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- CLI → Templates -->
+        <mxCell id="e40" value="scaffold" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;fontSize=10;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.3;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="d1" target="e1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e41" value="output" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;fontSize=10;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="d6" target="e5">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="865" y="760" />
+              <mxPoint x="1010" y="760" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e42" value="test" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;fontSize=10;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="d2" target="e4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- CLI → Blockchain -->
+        <mxCell id="e50" value="deploy tx" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;fontSize=10;strokeColor=#888;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="d5" target="f1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e51" value="verify contract" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;fontSize=10;strokeColor=#888;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="d3" target="f2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e52" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#888;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="e4" target="f3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

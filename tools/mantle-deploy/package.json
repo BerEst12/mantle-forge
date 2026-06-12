@@ -1,0 +1,15 @@
+{
+  "name": "@mantle-forge/mantle-deploy",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Deploy Mantle Hardhat projects to Mantle Sepolia",
+  "bin": { "mantle-deploy": "./cli.js" },
+  "main": "lib/deploy.js",
+  "type": "commonjs",
+  "scripts": { "test": "node --test test/*.test.js" },
+  "dependencies": {
+    "@mantle-forge/cli-utils": "0.0.0",
+    "@mantle-forge/mantle-check": "0.0.0"
+  },
+  "engines": { "node": ">=20" }
+}

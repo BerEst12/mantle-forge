@@ -1,0 +1,15 @@
+{
+  "name": "@mantle-forge/mantle-harden",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Full audit gate: Slither, Mythril, Foundry fuzz, Hardhat invariants, static triage",
+  "bin": { "mantle-harden": "./cli.js" },
+  "main": "lib/harden.js",
+  "type": "commonjs",
+  "scripts": { "test": "node --test test/*.test.js" },
+  "dependencies": {
+    "@mantle-forge/cli-utils": "0.0.0",
+    "@mantle-forge/mantle-audit": "0.0.0"
+  },
+  "engines": { "node": ">=20" }
+}

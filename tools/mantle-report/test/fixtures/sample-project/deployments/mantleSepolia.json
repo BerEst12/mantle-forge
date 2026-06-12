@@ -1,0 +1,10 @@
+{
+  "network": "mantleSepolia",
+  "chainId": 5003,
+  "contracts": {
+    "Vault": {
+      "address": "0xabc",
+      "txHash": "0xdef"
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "buildCommand": "npm run build",
+  "outputDirectory": "build",
+  "installCommand": "npm install",
+  "framework": null,
+  "redirects": [
+    { "source": "/docs", "destination": "/docs/intro", "permanent": false },
+    { "source": "/docs/", "destination": "/docs/intro", "permanent": false }
+  ]
+}

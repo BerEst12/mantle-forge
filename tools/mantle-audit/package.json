@@ -1,0 +1,12 @@
+{
+  "name": "@mantle-forge/mantle-audit",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Static triage layer for multi-engine security review (use with mantle-harden)",
+  "bin": { "mantle-audit": "./cli.js" },
+  "main": "lib/audit.js",
+  "type": "commonjs",
+  "scripts": { "test": "node --test test/*.test.js" },
+  "dependencies": { "@mantle-forge/cli-utils": "0.0.0" },
+  "engines": { "node": ">=20" }
+}

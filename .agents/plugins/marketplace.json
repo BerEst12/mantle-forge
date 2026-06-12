@@ -1,0 +1,22 @@
+{
+  "name": "mantle-forge",
+  "interface": {
+    "displayName": "Mantle Forge"
+  },
+  "plugins": [
+    {
+      "name": "mantle-forge",
+      "displayName": "Mantle Forge",
+      "source": {
+        "source": "local",
+        "path": "./plugins/mantle-forge"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Development & Workflow",
+      "description": "Mantle smart-contract DevOps — scaffold, test, harden, deploy Sepolia, report. Skills + shell CLIs; no MCP required."
+    }
+  ]
+}

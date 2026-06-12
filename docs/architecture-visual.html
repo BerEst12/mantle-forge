@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mantle Forge — Architecture</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap');
+
+  :root {
+    --bg: #07070f;
+    --surface: #0f0f1e;
+    --surface2: #14142a;
+    --border: #1e1e3a;
+    --purple: #7c3aed;
+    --purple-light: #a78bfa;
+    --indigo: #4f46e5;
+    --cyan: #06b6d4;
+    --green: #10b981;
+    --red: #ef4444;
+    --amber: #f59e0b;
+    --text: #e2e8f0;
+    --muted: #64748b;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+    padding: 3rem 2rem;
+    background-image:
+      radial-gradient(ellipse 80% 50% at 50% -20%, rgba(124,58,237,0.15) 0%, transparent 70%),
+      radial-gradient(ellipse 60% 40% at 90% 80%, rgba(6,182,212,0.07) 0%, transparent 60%);
+  }
+
+  /* ── Header ── */
+  header { text-align: center; margin-bottom: 4rem; }
+  header .badge {
+    display: inline-block;
+    background: linear-gradient(135deg, #7c3aed22, #06b6d422);
+    border: 1px solid #7c3aed55;
+    color: var(--purple-light);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.35rem 0.9rem;
+    border-radius: 999px;
+    margin-bottom: 1.2rem;
+  }
+  header h1 {
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 800;
+    background: linear-gradient(135deg, #fff 30%, #a78bfa 70%, #06b6d4 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1.15;
+    margin-bottom: 0.75rem;
+  }
+  header p { color: var(--muted); font-size: 0.95rem; }
+
+  /* ── Section titles ── */
+  .section-title {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+  .section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* ── SECTION 1 — Flow ── */
+  .flow-wrapper { margin-bottom: 4rem; }
+
+  .flow-steps {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    overflow-x: auto;
+    padding-bottom: 0.5rem;
+  }
+
+  .flow-step {
+    flex: 1;
+    min-width: 120px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.2rem 1rem;
+    text-align: center;
+    position: relative;
+    transition: transform 0.2s, border-color 0.2s;
+  }
+  .flow-step:hover { transform: translateY(-4px); }
+
+  .flow-step .icon {
+    font-size: 1.6rem;
+    margin-bottom: 0.5rem;
+    display: block;
+  }
+  .flow-step .label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text);
+  }
+  .flow-step .sub {
+    font-size: 0.68rem;
+    color: var(--muted);
+    margin-top: 0.2rem;
+  }
+
+  .flow-arrow {
+    color: var(--border);
+    font-size: 1.2rem;
+    padding: 0 0.4rem;
+    flex-shrink: 0;
+  }
+
+  .flow-step.s1 { border-color: #7c3aed66; }
+  .flow-step.s1 .icon { filter: drop-shadow(0 0 8px #7c3aed88); }
+  .flow-step.s2 { border-color: #4f46e566; }
+  .flow-step.s3 { border-color: #ef444466; }
+  .flow-step.s4 { border-color: #f59e0b66; }
+  .flow-step.s5 { border-color: #10b98166; }
+  .flow-step.s6 { border-color: #06b6d466; }
+  .flow-step.s6 .icon { filter: drop-shadow(0 0 8px #06b6d488); }
+
+  /* ── SECTION 2 — Layers ── */
+  .layers-wrapper { margin-bottom: 4rem; }
+
+  .layers {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .layer {
+    display: grid;
+    grid-template-columns: 180px 1fr auto;
+    align-items: center;
+    gap: 1.5rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1rem 1.4rem;
+    transition: border-color 0.2s;
+  }
+  .layer:hover { border-color: var(--purple); }
+
+  .layer .l-label {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--purple-light);
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+  .layer .l-label .dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .layer .l-desc {
+    font-size: 0.8rem;
+    color: var(--muted);
+  }
+
+  .layer .l-tags {
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+
+  .tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    font-weight: 600;
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    color: var(--muted);
+    white-space: nowrap;
+  }
+
+  /* ── SECTION 3 — Skills grid ── */
+  .skills-wrapper { margin-bottom: 4rem; }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1rem;
+  }
+
+  .skill-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.2rem;
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .skill-card:hover { border-color: var(--purple-light); transform: translateY(-3px); }
+
+  .skill-card .num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--purple-light);
+    background: #7c3aed18;
+    border: 1px solid #7c3aed44;
+    border-radius: 6px;
+    width: 28px; height: 28px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .skill-card .info .name {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 0.3rem;
+  }
+  .skill-card .info .cli {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    color: var(--cyan);
+  }
+  .skill-card .info .desc {
+    font-size: 0.73rem;
+    color: var(--muted);
+    margin-top: 0.3rem;
+    line-height: 1.4;
+  }
+
+  /* ── SECTION 4 — Repo tree ── */
+  .tree-wrapper { margin-bottom: 4rem; }
+
+  .tree {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+    line-height: 2;
+  }
+
+  .tree-root { color: var(--purple-light); font-weight: 700; }
+  .tree-dir { color: var(--cyan); }
+  .tree-desc { color: var(--muted); font-size: 0.72rem; }
+  .tree-line { color: var(--border); }
+
+  /* ── SECTION 5 — Env vars ── */
+  .env-wrapper { margin-bottom: 4rem; }
+  .env-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 0.7rem;
+  }
+  .env-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0.9rem 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+  .env-card .dot-env {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--amber);
+    flex-shrink: 0;
+    box-shadow: 0 0 6px var(--amber);
+  }
+  .env-card code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--amber);
+    font-weight: 600;
+  }
+
+  /* ── Footer ── */
+  footer {
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.75rem;
+    border-top: 1px solid var(--border);
+    padding-top: 2rem;
+    margin-top: 1rem;
+  }
+  footer strong { color: var(--purple-light); }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="badge">Turing Test Hackathon 2026 · AI DevTools · Phase 2</div>
+  <h1>Mantle Forge</h1>
+  <p>Architecture overview — plugins for Hermes, Cursor, Codex, Claude, OpenClaw, and OpenCode</p>
+</header>
+
+<!-- 1. FLAGSHIP FLOW -->
+<div class="flow-wrapper">
+  <div class="section-title">01 — Flagship Demo Flow</div>
+  <div class="flow-steps">
+    <div class="flow-step s1">
+      <span class="icon">🏗️</span>
+      <div class="label">Scaffold</div>
+      <div class="sub">from NL prompt</div>
+    </div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step s2">
+      <span class="icon">🧪</span>
+      <div class="label">Tests</div>
+      <div class="sub">run & fix</div>
+    </div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step s3">
+      <span class="icon">🔐</span>
+      <div class="label">Security</div>
+      <div class="sub">review findings</div>
+    </div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step s4">
+      <span class="icon">⛽</span>
+      <div class="label">Gas</div>
+      <div class="sub">analysis</div>
+    </div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step s5">
+      <span class="icon">🚀</span>
+      <div class="label">Deploy</div>
+      <div class="sub">Mantle Sepolia</div>
+    </div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step s6">
+      <span class="icon">📄</span>
+      <div class="label">Report</div>
+      <div class="sub">FINAL_REPORT.md</div>
+    </div>
+  </div>
+</div>
+
+<!-- 2. SYSTEM LAYERS -->
+<div class="layers-wrapper">
+  <div class="section-title">02 — System Layers</div>
+  <div class="layers">
+
+    <div class="layer">
+      <div class="l-label"><span class="dot" style="background:#a78bfa;box-shadow:0 0 6px #a78bfa"></span>Developer</div>
+      <div class="l-desc">Sends one natural language prompt — no manual Hardhat config, no boilerplate</div>
+      <div class="l-tags"><span class="tag">natural language</span><span class="tag">Cursor</span><span class="tag">Hermes Desktop</span><span class="tag">Codex</span><span class="tag">CLI</span></div>
+    </div>
+
+    <div class="layer">
+      <div class="l-label"><span class="dot" style="background:#4f46e5;box-shadow:0 0 6px #4f46e5"></span>AI Runtimes</div>
+      <div class="l-desc">Hermes, Cursor, Codex, Claude Code, OpenClaw, OpenCode — one-line plugin install per vendor</div>
+      <div class="l-tags"><span class="tag">plugin:hermes</span><span class="tag">plugin:cursor</span><span class="tag">plugin:codex</span><span class="tag">plugin:opencode</span></div>
+    </div>
+
+    <div class="layer">
+      <div class="l-label"><span class="dot" style="background:#7c3aed;box-shadow:0 0 6px #7c3aed"></span>Mantle Forge Plugins</div>
+      <div class="l-desc">Compatible bundle (skills, commands, rules, hooks) + Hermes native plugin (6 Python tools)</div>
+      <div class="l-tags"><span class="tag">plugins/mantle-forge/</span><span class="tag">plugins/hermes-mantle-forge/</span><span class="tag">hooks/</span></div>
+    </div>
+
+    <div class="layer">
+      <div class="l-label"><span class="dot" style="background:#06b6d4;box-shadow:0 0 6px #06b6d4"></span>CLI Tools</div>
+      <div class="l-desc">Six standalone commands the agent calls — each wraps Hardhat, Slither, gas-reporter, or deploy scripts</div>
+      <div class="l-tags">
+        <span class="tag">mantle-scaffold</span>
+        <span class="tag">mantle-audit</span>
+        <span class="tag">mantle-deploy</span>
+        <span class="tag">mantle-report</span>
+      </div>
+    </div>
+
+    <div class="layer">
+      <div class="l-label"><span class="dot" style="background:#10b981;box-shadow:0 0 6px #10b981"></span>Mantle Sepolia</div>
+      <div class="l-desc">Target testnet — contracts deployed here, tx hash and address captured in final report</div>
+      <div class="l-tags"><span class="tag">RPC · Explorer API</span></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- 3. SKILL PACK -->
+<div class="skills-wrapper">
+  <div class="section-title">03 — Skills (bundled in plugins)</div>
+  <div class="skills-grid">
+
+    <div class="skill-card">
+      <div class="num">01</div>
+      <div class="info">
+        <div class="name">Mantle Project Scaffold</div>
+        <div class="cli">mantle-scaffold</div>
+        <div class="desc">New Mantle-ready Hardhat project from a natural language request</div>
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <div class="num">02</div>
+      <div class="info">
+        <div class="name">Mantle Hardhat Config</div>
+        <div class="cli">mantle-check</div>
+        <div class="desc">Fix or validate hardhat.config.ts for Mantle Sepolia network</div>
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <div class="num">03</div>
+      <div class="info">
+        <div class="name">Mantle Security Review</div>
+        <div class="cli">mantle-audit</div>
+        <div class="desc">Practical Solidity review — findings, severity, remediation notes</div>
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <div class="num">04</div>
+      <div class="info">
+        <div class="name">Mantle Gas Analysis</div>
+        <div class="cli">mantle-gas-report</div>
+        <div class="desc">Gas reporter output with safe optimization suggestions</div>
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <div class="num">05</div>
+      <div class="info">
+        <div class="name">Mantle Test Runner</div>
+        <div class="cli">hardhat test</div>
+        <div class="desc">Run tests, capture failures, suggest targeted fixes</div>
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <div class="num">06</div>
+      <div class="info">
+        <div class="name">Mantle Deploy Sepolia</div>
+        <div class="cli">mantle-deploy</div>
+        <div class="desc">Deploy contract, capture contract address and tx hash</div>
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <div class="num">07</div>
+      <div class="info">
+        <div class="name">Mantle Report Generator</div>
+        <div class="cli">mantle-report</div>
+        <div class="desc">Merge all outputs into a single FINAL_REPORT.md</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- 4. REPO TREE -->
+<div class="tree-wrapper">
+  <div class="section-title">04 — Repository Layout</div>
+  <div class="tree">
+    <div><span class="tree-root">📁 mantle-forge/</span></div>
+    <div><span class="tree-line">├─ </span><span class="tree-dir">plugins/</span> &nbsp;<span class="tree-desc">mantle-forge bundle (skills, hooks) · hermes-mantle-forge native</span></div>
+    <div><span class="tree-line">├─ </span><span class="tree-dir">.opencode/</span> &nbsp;<span class="tree-desc">OpenCode install + skills</span></div>
+    <div><span class="tree-line">├─ </span><span class="tree-dir">installer/</span> &nbsp;<span class="tree-desc">install-plugin.js · install.sh · verify-plugin.js</span></div>
+    <div><span class="tree-line">├─ </span><span class="tree-dir">hermes/</span></div>
+    <div><span class="tree-line">│  ├─ </span><span class="tree-dir">skills/</span> &nbsp;<span class="tree-desc">7 Mantle-specific skill files</span></div>
+    <div><span class="tree-line">│  ├─ </span><span class="tree-dir">workflows/</span> &nbsp;<span class="tree-desc">full build-harden-deploy · harden · deploy</span></div>
+    <div><span class="tree-line">│  ├─ </span><span class="tree-dir">system-instructions/</span></div>
+    <div><span class="tree-line">│  └─ </span><span class="tree-dir">gateway/</span> &nbsp;<span class="tree-desc">Discord · Telegram setup guides</span></div>
+    <div><span class="tree-line">├─ </span><span class="tree-dir">tools/</span> &nbsp;<span class="tree-desc">mantle-scaffold · check · gas-report · audit · deploy · report</span></div>
+    <div><span class="tree-line">├─ </span><span class="tree-dir">templates/</span> &nbsp;<span class="tree-desc">hardhat-mantle-starter · token-vault · nft-minter</span></div>
+    <div><span class="tree-line">├─ </span><span class="tree-dir">knowledge/</span> &nbsp;<span class="tree-desc">network config · checklists · troubleshooting</span></div>
+    <div><span class="tree-line">├─ </span><span class="tree-dir">examples/</span> &nbsp;<span class="tree-desc">demo runs · sample reports</span></div>
+    <div><span class="tree-line">└─ </span><span class="tree-dir">docs/docusaurus/</span></div>
+  </div>
+</div>
+
+<!-- 5. ENV VARS -->
+<div class="env-wrapper">
+  <div class="section-title">05 — Required Environment Variables</div>
+  <div class="env-grid">
+    <div class="env-card"><div class="dot-env"></div><code>MANTLE_SEPOLIA_RPC_URL</code></div>
+    <div class="env-card"><div class="dot-env"></div><code>MANTLE_PRIVATE_KEY</code></div>
+    <div class="env-card"><div class="dot-env"></div><code>MANTLE_EXPLORER_API_KEY</code></div>
+    <div class="env-card"><div class="dot-env"></div><code>OPENROUTER_API_KEY</code></div>
+    <div class="env-card"><div class="dot-env"></div><code>GITHUB_TOKEN</code></div>
+  </div>
+</div>
+
+<footer>
+  <strong>Mantle Forge</strong> · Turing Test Hackathon 2026 · AI DevTools · Mantle Sepolia default
+</footer>
+
+</body>
+</html>

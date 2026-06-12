@@ -1,0 +1,24 @@
+{
+  "network": "mantleSepolia",
+  "chainId": 5003,
+  "interface": "hermes-desktop",
+  "hermesVersion": "v0.15.1",
+  "deployer": "0xDdFE23C46269220feF396e9cDc42b10A3F306409",
+  "contracts": {
+    "DemoToken": {
+      "address": "0x4E6226734449Dc01b778816Ad0cb9Ad258a3Db3D",
+      "txHash": "0x8ee75bc02e6896f842abd21d17822ea4770b2e2ac10f08b51673d4eb089ef286"
+    },
+    "TokenVault": {
+      "address": "0xa6608D936405470A5AF9cD003477a2042Cd0b4Ee",
+      "txHash": "0xf50d95f1916008a731c3e7983841722acd969fabb4559d9fbfc628007c0a4da8",
+      "constructorArgs": ["0x4E6226734449Dc01b778816Ad0cb9Ad258a3Db3D"]
+    }
+  },
+  "explorer": {
+    "tokenVault": "https://sepolia.mantlescan.xyz/address/0xa6608D936405470A5AF9cD003477a2042Cd0b4Ee",
+    "demoToken": "https://sepolia.mantlescan.xyz/address/0x4E6226734449Dc01b778816Ad0cb9Ad258a3Db3D"
+  },
+  "deployedAt": "2026-06-05T00:05:50.195Z",
+  "projectPath": "mantle-demo-workspace/token-vault"
+}

@@ -1,0 +1,31 @@
+{
+  "version": 2,
+  "projectDir": "./token-vault",
+  "ok": true,
+  "fullGate": true,
+  "steps": [
+    {
+      "name": "setup",
+      "ok": true,
+      "actions": ["installed slither-analyzer + mythril"],
+      "slither": true,
+      "mythril": true,
+      "forge": true,
+      "solc": true,
+      "solcVersion": "0.8.24"
+    },
+    { "name": "slither", "ok": true, "findings": 0 },
+    { "name": "mythril", "ok": true, "findings": 0, "targets": ["contracts/TokenVault.sol"] },
+    { "name": "foundry-fuzz", "ok": true, "testsPassed": "3", "fuzzRuns": "512" },
+    { "name": "hardhat-invariants", "ok": true, "passing": "2", "grep": "invariant|fuzz" },
+    { "name": "static-triage", "ok": true, "findings": 1 }
+  ],
+  "summary": {
+    "slitherFindings": 0,
+    "mythrilFindings": 0,
+    "staticFindings": 1,
+    "foundryTestsPassed": "3",
+    "hardhatInvariantTests": "2"
+  },
+  "completedAt": "2026-06-11T12:00:00.000Z"
+}

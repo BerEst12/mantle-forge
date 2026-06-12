@@ -1,0 +1,23 @@
+{
+  "name": "@mantle-forge/mantle-scan",
+  "version": "0.0.0",
+  "private": true,
+  "description": "CLI tools for Mantle Scan explorer API — tx lookup, contract info, tx history, whale tracker",
+  "bin": {
+    "mantle-scan-tx": "./cli-tx.js",
+    "mantle-scan-contract": "./cli-contract.js",
+    "mantle-tx-history": "./cli-history.js",
+    "mantle-whale-tracker": "./cli-whale.js"
+  },
+  "main": "lib/scan.js",
+  "type": "commonjs",
+  "scripts": {
+    "test": "node --test test/*.test.js"
+  },
+  "dependencies": {
+    "@mantle-forge/cli-utils": "0.0.0"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

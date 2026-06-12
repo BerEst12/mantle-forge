@@ -1,0 +1,16 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup|clear|compact",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"${CURSOR_PLUGIN_ROOT}/scripts/verify-env.js\"",
+            "async": true
+          }
+        ]
+      }
+    ]
+  }
+}
