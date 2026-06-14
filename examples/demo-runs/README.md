@@ -18,4 +18,5 @@ Install to reproduce: `npm install && npm run plugin:hermes` — see [docs/plugi
 | `sample-tencent-audit.json` | Structured JSON findings from Hunyuan |
 | `sample-cos-upload.md` | `reports/cos-upload.md` — Tencent Cloud COS artifact URLs |
 | `sample-gas-report.md` | `reports/gas.md` — gas analysis |
+| [`gas-benchmark-before-after.md`](./gas-benchmark-before-after.md) | **Reproducible before/after gas benchmark** — real measured savings (baseline vs optimized vault), regenerate with `npx hardhat test --grep "gas benchmark"` |
 | `sample-mantleSepolia-deployment.json` | Deployment artifacts with address + tx hash |

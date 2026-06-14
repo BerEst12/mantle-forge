@@ -154,6 +154,8 @@ deploy it to Mantle Sepolia, and generate an engineering report.
 
 Verified on Mantle Sepolia: TokenVault [`0x64D825eDcE57d56365bEb026CEAe4D2D439f7874`](https://sepolia.mantlescan.xyz/address/0x64D825eDcE57d56365bEb026CEAe4D2D439f7874) (latest E2E, 2026-06-07). More: [`examples/demo-runs/`](examples/demo-runs/)
 
+Reproducible gas evidence: [`examples/demo-runs/gas-benchmark-before-after.md`](examples/demo-runs/gas-benchmark-before-after.md) — real measured before/after savings (baseline vs optimized vault), regenerate with `npx hardhat test --grep "gas benchmark"`.
+
 ---
 
 ## What's inside

@@ -16,6 +16,8 @@ Core workflow: scaffold → test → audit → gas → deploy → report.
 | `mantle-deploy-sepolia` | Deploy + capture artifacts | `mantle-deploy` |
 | `mantle-report-generator` | `FINAL_REPORT.md` | `mantle-report` |
 
+> `mantle-gas-analysis` produces **reproducible before/after gas benchmarks**, not just a snapshot. See the real measured savings (baseline vs optimized vault) in [gas-benchmark-before-after.md](https://github.com/BerEst12/mantle-forge/blob/main/examples/demo-runs/gas-benchmark-before-after.md) — regenerate with `npx hardhat test --grep "gas benchmark"`.
+
 ## Tencent Cloud skills
 
 Deep AI audit and artifact publishing powered by Tencent Cloud.
