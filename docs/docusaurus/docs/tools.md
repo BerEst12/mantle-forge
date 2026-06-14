@@ -1,11 +1,11 @@
 # CLI tools
 
-**15 CLI tools** ship in the workspace — **6 engineering** (flagship pipeline) + **2 Tencent Cloud** (Hunyuan audit + COS upload) + **7 DeFi data** (Mantlescan + Merchant Moe). Agents invoke these via skills; engineering output is verifiable on disk, on-chain, and in Tencent Cloud COS.
+**16 CLI tools** ship in the workspace — **7 engineering** (flagship pipeline + `mantle-harden`) + **2 Tencent Cloud** (Hunyuan audit + COS upload) + **7 DeFi data** (Mantlescan + Merchant Moe). Agents invoke the engineering and Tencent tools via skills; the DeFi data CLIs are invoked directly. Engineering output is verifiable on disk, on-chain, and in Tencent Cloud COS.
 
 Install workspace: `npm install` from repo root.  
 Wire into agent: `npm run plugin:<vendor>` — see [Plugins](./plugins/).
 
-## Smart-contract engineering CLIs (6)
+## Smart-contract engineering CLIs (7)
 
 | CLI | Example | Output |
 |-----|---------|--------|
@@ -13,6 +13,7 @@ Wire into agent: `npm run plugin:<vendor>` — see [Plugins](./plugins/).
 | `mantle-check` | `npx mantle-check ./my-vault` | Validation report |
 | `mantle-gas-report` | `npx mantle-gas-report ./my-vault --out reports/gas.md` | Gas analysis |
 | `mantle-audit` | `npx mantle-audit ./my-vault --out reports/security.md` | Security findings |
+| `mantle-harden` | `npx mantle-harden ./my-vault` | Full gate: Slither + Mythril + Foundry + invariants |
 | `mantle-deploy` | `npx mantle-deploy ./my-vault --network mantleSepolia` | Address + tx hash |
 | `mantle-report` | `npx mantle-report ./my-vault --out FINAL_REPORT.md` | Engineering summary |
 

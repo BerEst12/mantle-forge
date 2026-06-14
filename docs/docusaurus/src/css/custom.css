@@ -1,12 +1,10 @@
 /* Mantle Forge — Design System */
 /* Brand: pixel forge glyph · dark developer-tool · Mantle green + forge amber + signal cyan */
-/* Reference: docs/brand/brand-system.md */
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;700;800&display=swap');
 
 /* ============================================================
    DESIGN TOKENS
-   Canonical token names match brand-system.md §19
    ============================================================ */
 
 :root {

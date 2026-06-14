@@ -116,12 +116,12 @@ npx mantle-deploy ./my-vault --network mantleSepolia
 npx mantle-report ./my-vault --out FINAL_REPORT.md
 ```
 
-DeFi data capabilities (Mantle Scan, Merchant Moe, prices, yields) are handled by the **17 DeFi skills** — ask your agent directly:
+DeFi data capabilities (Mantle Scan + Merchant Moe) are handled by the **7 DeFi data CLIs** — ask your agent directly:
 
 ```txt
 Show me the transaction history for 0xabc123...
 What are the top Merchant Moe pools by APY?
-How much USDC do I get for 100 MNT?
+How much USDC do I get for 100 MNT on Merchant Moe?
 ```
 
 See [Skills](./skills) · [Tools](./tools).

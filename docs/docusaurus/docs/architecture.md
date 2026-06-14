@@ -17,7 +17,7 @@ The entry point. **Hermes** (flagship, native Python tools) plus **Cursor, Codex
 ### Tier 3 — Mantle Forge plugins
 - **`plugins/mantle-forge`** — universal bundle for all non-Hermes agents (skills, rules, hooks, commands, scripts).
 - **`plugins/hermes-mantle-forge`** — Hermes-native plugin with registered Python tools.
-- Skills split into **7 engineering** (scaffold · check · audit · gas · deploy · report) and **17 DeFi data** (prices · TVL · yields · lending · Merchant Moe).
+- **9 skills**: **7 engineering** (scaffold · check · audit · gas · deploy · report) + **2 Tencent Cloud** (Hunyuan audit · COS upload). DeFi data ships as **7 CLIs** (Merchant Moe · Mantlescan), not skills.
 
 ### Tier 4 — CLI execution layer
 The deterministic core in `tools/`: `mantle-scaffold`, `mantle-check`, `mantle-audit`, `mantle-gas-report`, `mantle-deploy`, `mantle-report`, plus `mantle-scan-*` and `mantle-moe-*` data CLIs. Agents orchestrate; **CLIs do the verifiable work**.

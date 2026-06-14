@@ -1,6 +1,6 @@
 # Skills
 
-**26 skills** ship **inside** Mantle Forge plugins — they are not installed separately. After `npm run plugin:<vendor>`, your agent discovers them through the plugin bundle (or Hermes native plugin).
+**9 skills** ship **inside** Mantle Forge plugins — they are not installed separately. After `npm run plugin:<vendor>`, your agent discovers them through the plugin bundle (or Hermes native plugin). DeFi data capabilities are delivered as **7 deterministic CLIs** (see below), not skills.
 
 ## Smart-contract engineering skills
 
@@ -59,33 +59,25 @@ npx mantle-cos-upload ./my-vault --out reports/cos-upload.md
 
 > **Credentials:** [console.cloud.tencent.com/hunyuan](https://console.cloud.tencent.com/hunyuan) · [console.cloud.tencent.com/cam/capi](https://console.cloud.tencent.com/cam/capi)
 
-## DeFi data skills — prices & market
+## DeFi data CLIs
 
-Real-time on-chain and market data. No API key required.
+DeFi data is **not** a skill layer — it ships as **7 deterministic CLIs** in `tools/mantle-scan/` and `tools/mantle-moe/`. Your agent invokes them directly (`npx mantle-*`); no API key required. Full reference: [CLI tools](./tools).
 
-| Skill | Purpose | Source |
-|-------|---------|--------|
-| `mantle-defi-prices` | Real-time token prices on Mantle | DefiLlama |
-| `mantle-token-info` | Price, volume, liquidity for any token | DexScreener |
-| `mantle-coingecko` | MNT price history, market cap, ecosystem tokens | CoinGecko |
-| `mantle-gas-tracker` | Current gas price + tx cost estimates in USD | Mantle RPC |
+### Mantle Scan explorer (4)
 
-## DeFi data skills — TVL & protocols
+| CLI | Purpose | Source |
+|-----|---------|--------|
+| `mantle-scan-tx` | Decode any transaction by hash | Mantlescan API |
+| `mantle-scan-contract` | Contract info, ABI, function signatures | Mantlescan API |
+| `mantle-tx-history` | Wallet tx history + gas summary | Mantlescan API |
+| `mantle-whale-tracker` | Large MNT transfers in recent blocks | Mantle RPC |
 
-| Skill | Purpose | Source |
-|-------|---------|--------|
-| `mantle-tvl-overview` | Total TVL on Mantle ranked by protocol | DefiLlama |
-| `mantle-protocol-stats` | TVL, volume, fees for any Mantle protocol | DefiLlama |
-| `mantle-yield-finder` | Best APY opportunities on Mantle right now | DefiLlama Yields |
-| `mantle-lending-rates` | Supply APY and borrow APR (Lendle, INIT Capital) | DefiLlama Yields |
-| `mantle-meth-info` | mETH liquid staking APY, TVL, exchange rate | mETH + DefiLlama |
-
-## DeFi data skills — Merchant Moe
+### Merchant Moe (3)
 
 Uses **Liquidity Book 2.2** architecture.
 
-| Skill | Purpose | Source |
-|-------|---------|--------|
+| CLI | Purpose | Source |
+|-----|---------|--------|
 | `mantle-moe-pools` | All pools ranked by TVL, volume, or APY | Moe subgraph / DefiLlama |
 | `mantle-moe-best-pool` | Best pool for a specific token pair | Moe subgraph / DefiLlama |
 | `mantle-moe-swap-quote` | Real-time swap quote via LBQuoter — no wallet needed | Mantle RPC (on-chain) |
@@ -100,24 +92,7 @@ Uses **Liquidity Book 2.2** architecture.
 
 Source: [docs.merchantmoe.com/resources/contracts](https://docs.merchantmoe.com/resources/contracts)
 
-## DeFi data skills — Mantle Scan explorer
-
-| Skill | Purpose | CLI tool |
-|-------|---------|----------|
-| `mantle-scan-tx` | Decode any transaction by hash | `mantle-scan-tx` |
-| `mantle-scan-contract` | Contract info, ABI, function signatures | `mantle-scan-contract` |
-| `mantle-tx-history` | Wallet tx history + gas summary | `mantle-tx-history` |
-| `mantle-whale-tracker` | Large MNT transfers in recent blocks | `mantle-whale-tracker` |
-
-## DeFi data skills — wallet
-
-| Skill | Purpose | Source |
-|-------|---------|--------|
-| `mantle-wallet-overview` | Full portfolio: tokens + DeFi positions | Zerion + Mantle RPC |
-
-> **Zerion API key** optional but recommended for DeFi position breakdown. Free tier: 100 req/day at [developers.zerion.io](https://developers.zerion.io).
-
-**Engineering skills** (`hermes/skills/`) sync via `npm run plugin:sync-skills`. **DeFi skills** live in `plugins/mantle-forge/skills/`. Hermes install copies the full bundle skills directory.
+**Engineering skills** (`hermes/skills/`) sync via `npm run plugin:sync-skills`. All **9 bundle skills** (7 engineering + 2 Tencent Cloud) live in `plugins/mantle-forge/skills/`. Hermes install copies the full bundle skills directory.
 
 ## How skills load per runtime
 
@@ -147,15 +122,15 @@ Add tests, run a security review, optimize gas where possible,
 deploy it to Mantle Sepolia, and generate an engineering report.
 ```
 
-DeFi data prompts:
+DeFi data prompts (backed by the 7 CLIs):
 
 ```txt
-What's the current price of MNT?
-Show me the best yield opportunities on Mantle right now.
 What are the top Merchant Moe pools by APY?
+What's the best Merchant Moe pool for MNT/USDC?
+How much USDC do I get for 100 MNT on Merchant Moe?
 Show me the transaction history for 0xabc123...
+Decode transaction 0xdef456... on Mantle.
 Are there any whale transactions on Mantle in the last hour?
-What's the TVL breakdown on Mantle?
 ```
 
 Hermes direct tool call:

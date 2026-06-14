@@ -17,7 +17,7 @@ You do **not** need MCP for Mantle Forge. Non-Hermes agents use skills + shell; 
 | `.cursor-plugin/plugin.json` | Cursor | [Cursor plugins](https://cursor.com/docs/plugins) |
 | `.claude-plugin/plugin.json` | Claude Code | [Claude plugins](https://claude.com/plugins) |
 | `.codex-plugin/plugin.json` | Codex (`"skills": "./skills/"`) | [Codex plugins](https://developers.openai.com/codex/plugins) |
-| `skills/<name>/SKILL.md` | All | 7 engineering synced from `hermes/skills/`; 17 DeFi authored in bundle |
+| `skills/<name>/SKILL.md` | All | 7 engineering synced from `hermes/skills/`; 2 Tencent Cloud authored in bundle (DeFi data ships as CLIs, not skills) |
 | `commands/*.md` | Claude, OpenClaw | YAML frontmatter: `name`, `description` |
 | `.cursor/commands/*.md` | Cursor slash commands | Same frontmatter |
 | `rules/*.mdc` | Cursor | `alwaysApply` / `globs` frontmatter |
@@ -57,12 +57,12 @@ Install: `npm run plugin:hermes` (WSL on Windows).
    ```
 3. Reinstall target vendor or reload IDE.
 
-### DeFi data skill (API-only, no CLI needed)
+### Data skill (API-only, no CLI needed)
 1. Create `plugins/mantle-forge/skills/mantle-<name>/SKILL.md`
 2. Procedure section uses `curl` + `python3` inline — no extra tool required
 3. Sync and reinstall as above
 
-### DeFi data skill (with CLI tool)
+### Data skill (with CLI tool)
 1. Create `tools/mantle-<name>/` with `lib/`, `cli-*.js`, `test/`, `package.json`
 2. Add to `test:tools` in root `package.json`
 3. Create `plugins/mantle-forge/skills/mantle-<name>/SKILL.md` referencing the CLI

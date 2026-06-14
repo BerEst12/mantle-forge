@@ -160,7 +160,7 @@ Verified on Mantle Sepolia: TokenVault [`0x64D825eDcE57d56365bEb026CEAe4D2D439f7
 
 ### Skills library
 
-**26 skills** in the compatible plugin bundle — **7 engineering** + **2 Tencent Cloud** + **17 DeFi data**. Hermes native plugin ships the 7 engineering skills plus 6 Python tools.
+**9 skills** in the compatible plugin bundle — **7 engineering** + **2 Tencent Cloud**. Hermes native plugin ships the 7 engineering skills plus 6 Python tools. DeFi data is delivered as deterministic **CLIs** (see below), not skills.
 
 #### Engineering (flagship workflow)
 
@@ -195,17 +195,18 @@ npx mantle-cos-upload ./my-vault --out reports/cos-upload.md
 
 #### DeFi data (read-only, no deploy)
 
-Prices, TVL, yields, lending, Merchant Moe pools/swap quotes, Mantlescan tx lookup, wallet overview — see [Skills docs](https://mantle-forge-0.vercel.app/docs/skills).
+Prices, TVL, yields, lending, Merchant Moe pools/swap quotes, Mantlescan tx lookup, whale tracking — exposed as **7 DeFi data CLIs** (Mantlescan + Merchant Moe), invoked directly or by your agent. See [Tools docs](https://mantle-forge-0.vercel.app/docs/tools).
 
 ### CLI tools
 
-**6 engineering CLIs** (flagship pipeline) + **2 Tencent Cloud CLIs** + **7 DeFi data CLIs** (Mantlescan + Merchant Moe).
+**16 CLI tools** — **7 engineering CLIs** (flagship pipeline + `mantle-harden`) + **2 Tencent Cloud CLIs** + **7 DeFi data CLIs** (Mantlescan + Merchant Moe).
 
 ```bash
 npx mantle-scaffold token-vault ./my-vault
 npx mantle-check ./my-vault
 npx mantle-gas-report ./my-vault --out reports/gas.md
 npx mantle-audit ./my-vault --out reports/security.md
+npx mantle-harden ./my-vault   # full gate: Slither + Mythril + Foundry + invariants
 npx mantle-deploy ./my-vault --network mantleSepolia
 npx mantle-report ./my-vault --out FINAL_REPORT.md
 ```
@@ -264,7 +265,6 @@ mantle-forge/
 | **Track** | AI DevTools |
 | **Product** | Mantle Forge — Mantle execution layer for coding agents |
 | **Thesis** | Do not build another agent runtime. Give any coding agent Mantle-native skills, tools, and workflows. |
-| **Submission** | [`docs/SUBMISSION.md`](docs/SUBMISSION.md) |
 
 ---
 
@@ -290,7 +290,6 @@ Setup: [`hermes/README.md`](hermes/README.md) · [`knowledge/demo-wallet-setup.m
 | Plugin guides | [`docs/plugins/`](docs/plugins/) |
 | Docusaurus site | [`docs/docusaurus/`](docs/docusaurus/) |
 | Agent instructions | [`AGENTS.md`](AGENTS.md) |
-| Submission package | [`docs/SUBMISSION.md`](docs/SUBMISSION.md) |
 
 ---
 

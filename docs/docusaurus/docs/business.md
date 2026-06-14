@@ -33,7 +33,7 @@ Each ships pre-configured for Mantle Sepolia with tests, gas report, and an audi
 
 ## Skill Packs
 
-The 26 skills in the repo are the free tier. Packaged skill bundles go deeper:
+The 9 skills and 16 CLIs in the repo are the free tier. Packaged skill bundles go deeper:
 
 | Pack | Contents |
 |------|----------|

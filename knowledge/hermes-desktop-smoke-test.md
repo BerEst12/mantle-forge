@@ -32,7 +32,7 @@ Configure Nous Portal (or another provider) in onboarding.
 
 | # | Action | Pass if |
 |---|--------|---------|
-| A | **Skills & Tools** → search `mantle-` | 7 engineering skills visible (24 in compatible bundle) |
+| A | **Skills & Tools** → search `mantle-` | 7 engineering skills visible (9 in compatible bundle) |
 | B | Tools: `mantle_scaffold`, `mantle_deploy`, … | 6 Mantle tools listed |
 | C | Flagship prompt (below) | Agent runs full workflow |
 

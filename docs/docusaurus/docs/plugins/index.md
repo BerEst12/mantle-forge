@@ -25,9 +25,9 @@ npm run plugin:verify
 | Artifact | Path | Runtimes | What it provides |
 |----------|------|----------|------------------|
 | **Compatible bundle** | `plugins/mantle-forge/` | Cursor, Codex, Claude, OpenClaw, OpenCode | Skills, commands, rules, hooks, scripts |
-| **Hermes native** | `plugins/hermes-mantle-forge/` | Hermes only | 6 Python tools + full bundle skills (24) on install |
+| **Hermes native** | `plugins/hermes-mantle-forge/` | Hermes only | 6 Python tools + full bundle skills (9) on install |
 
-The Hermes plugin ships **7 engineering skills**. The compatible bundle ships **24 skills** (7 engineering + 17 DeFi data). Both use the same **CLI tools** in `tools/mantle-*`.
+The Hermes plugin ships **7 engineering skills**. The compatible bundle ships **9 skills** (7 engineering + 2 Tencent Cloud). Both use the same **16 CLI tools** in `tools/mantle-*` — including the 7 DeFi data CLIs.
 
 ```text
 Coding agent
@@ -49,7 +49,7 @@ Hardhat templates + Mantle Sepolia
 | `.cursor-plugin/plugin.json` | Cursor manifest |
 | `.claude-plugin/plugin.json` | Claude Code manifest |
 | `.codex-plugin/plugin.json` | Codex manifest |
-| `skills/` | 24 `mantle-*` skills (7 engineering + 17 DeFi data) |
+| `skills/` | 9 `mantle-*` skills (7 engineering + 2 Tencent Cloud) |
 | `commands/` | Flagship workflow (Claude / OpenClaw) |
 | `.cursor/commands/` | Cursor slash commands |
 | `rules/` | Cursor rules (`.mdc`) |
@@ -82,9 +82,9 @@ No MCP required. CLIs are the deterministic execution layer.
 | Layer | Count | Authored in | Synced by |
 |-------|-------|-------------|-----------|
 | Engineering | 7 | `hermes/skills/` | `npm run plugin:sync-skills` |
-| DeFi data | 17 | `plugins/mantle-forge/skills/` | Shipped in bundle (not from `hermes/skills/`) |
+| Tencent Cloud | 2 | `plugins/mantle-forge/skills/` | Shipped in bundle (not from `hermes/skills/`) |
 
-Compatible bundle total: **24 skills**. Hermes native plugin copies the full bundle skills directory on install.
+Compatible bundle total: **9 skills**. DeFi data ships as **7 CLIs** (`tools/mantle-scan/`, `tools/mantle-moe/`), not skills. Hermes native plugin copies the full bundle skills directory on install.
 
 ```bash
 npm run plugin:sync-skills   # engineering skills only

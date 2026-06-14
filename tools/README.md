@@ -1,8 +1,8 @@
 # Tools
 
-Mantle Forge CLI utilities — **13 commands** across engineering and DeFi data workflows.
+Mantle Forge CLI utilities — **16 commands** across engineering, Tencent Cloud, and DeFi data workflows.
 
-## Engineering CLIs (6)
+## Engineering CLIs (7)
 
 | Command | Purpose |
 |---------|---------|
@@ -13,6 +13,13 @@ Mantle Forge CLI utilities — **13 commands** across engineering and DeFi data 
 | `mantle-harden` | **Full gate:** Slither + Mythril + Foundry + invariants + triage |
 | `mantle-deploy` | Deploy to Mantle Sepolia → `deployments/mantleSepolia.json` |
 | `mantle-report` | Merge artifacts into `FINAL_REPORT.md` |
+
+## Tencent Cloud CLIs (2)
+
+| Command | Purpose |
+|---------|---------|
+| `mantle-tencent-audit` | Deep AI security audit via Tencent Hunyuan (direct or OpenRouter) |
+| `mantle-cos-upload` | Publish pipeline artifacts to Tencent Cloud COS |
 
 ## DeFi data CLIs (7)
 

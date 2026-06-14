@@ -102,7 +102,7 @@ function TerminalStrip() {
             <span>
               <span className={styles.terminalCheck}>✓</span>{' '}
               <span className={styles.terminalLabel}>Mantle Forge plugin installed </span>{' '}
-              <span className={styles.terminalMeta}>[15 tools · 26 skills]</span>
+              <span className={styles.terminalMeta}>[16 tools · 9 skills]</span>
             </span>
             <br />
             <span>
@@ -177,15 +177,15 @@ const FEATURES = [
     icon: '🧠',
     strip: 'cyan',
     title: 'Plugin Bundle',
-    desc: 'Multi-vendor plugin with 26 skills (7 engineering + 2 Tencent Cloud + 17 DeFi), commands, rules, and hooks — one install per runtime.',
+    desc: 'Multi-vendor plugin with 9 skills (7 engineering + 2 Tencent Cloud), commands, rules, and hooks — one install per runtime. DeFi data ships as 7 CLIs.',
     mono: 'mantle-scaffold  mantle-check\nmantle-audit     mantle-deploy\nmantle-tencent-audit',
   },
   {
     icon: '🔧',
     strip: 'green',
     title: 'Tool Layer',
-    desc: '15 CLI tools the agent invokes: scaffold, check, audit, gas-report, deploy, verify, report, tencent-audit, cos-upload, scan (4), and moe (3).',
-    mono: 'mantle-scaffold    mantle-check\nmantle-audit       mantle-gas-report\nmantle-deploy      mantle-verify\nmantle-tencent-audit  mantle-cos-upload\nmantle-scan        mantle-moe',
+    desc: '16 CLI tools the agent invokes: scaffold, check, audit, gas-report, harden, deploy, report, tencent-audit, cos-upload, scan (4), and moe (3).',
+    mono: 'mantle-scaffold    mantle-check\nmantle-audit       mantle-gas-report\nmantle-harden      mantle-deploy\nmantle-report      mantle-tencent-audit\nmantle-cos-upload  mantle-scan\nmantle-moe',
   },
   {
     icon: '⚙️',

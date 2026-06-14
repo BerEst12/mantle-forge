@@ -53,7 +53,7 @@
         <mxCell id="32" value="plugins/hermes-mantle-forge&#xa;Hermes native" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;" vertex="1" parent="30">
           <mxGeometry x="300" y="40" width="220" height="70" as="geometry" />
         </mxCell>
-        <mxCell id="33" value="24 skills&#xa;(7 eng + 17 DeFi)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;" vertex="1" parent="30">
+        <mxCell id="33" value="9 skills&#xa;(7 eng + 2 Tencent)&#xa;+ 7 DeFi CLIs" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;" vertex="1" parent="30">
           <mxGeometry x="560" y="40" width="160" height="70" as="geometry" />
         </mxCell>
         <mxCell id="34" value="rules · hooks&#xa;commands · scripts" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;" vertex="1" parent="30">
