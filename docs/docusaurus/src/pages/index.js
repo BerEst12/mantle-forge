@@ -102,7 +102,7 @@ function TerminalStrip() {
             <span>
               <span className={styles.terminalCheck}>✓</span>{' '}
               <span className={styles.terminalLabel}>Mantle Forge plugin installed </span>{' '}
-              <span className={styles.terminalMeta}>[16 tools · 9 skills]</span>
+              <span className={styles.terminalMeta}>[16 tools · 26 skills]</span>
             </span>
             <br />
             <span>
@@ -177,7 +177,7 @@ const FEATURES = [
     icon: '🧠',
     strip: 'cyan',
     title: 'Plugin Bundle',
-    desc: 'Multi-vendor plugin with 9 skills (7 engineering + 2 Tencent Cloud), commands, rules, and hooks — one install per runtime. DeFi data ships as 7 CLIs.',
+    desc: 'Multi-vendor plugin with 26 skills (7 engineering + 2 Tencent Cloud + 17 DeFi data), commands, rules, and hooks — one install per runtime.',
     mono: 'mantle-scaffold  mantle-check\nmantle-audit     mantle-deploy\nmantle-tencent-audit',
   },
   {

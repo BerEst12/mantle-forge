@@ -1,6 +1,6 @@
 # Install — Hermes
 
-Hermes gets the **native Python plugin** (`plugins/hermes-mantle-forge/`) with six registered Python tools. The installed bundle includes **9 skills** (7 engineering + 2 Tencent Cloud); DeFi data is available through the **7 DeFi data CLIs**.
+Hermes gets the **native Python plugin** (`plugins/hermes-mantle-forge/`) with six registered Python tools. The installed bundle includes **26 skills** (7 engineering + 2 Tencent Cloud + 17 DeFi data).
 
 ## One line
 

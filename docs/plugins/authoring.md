@@ -17,7 +17,7 @@ You do **not** need MCP for Mantle Forge. Non-Hermes agents use skills + shell; 
 | `.cursor-plugin/plugin.json` | Cursor | [Cursor plugins](https://cursor.com/docs/plugins) |
 | `.claude-plugin/plugin.json` | Claude Code | [Claude plugins](https://claude.com/plugins) |
 | `.codex-plugin/plugin.json` | Codex (`"skills": "./skills/"`) | [Codex plugins](https://developers.openai.com/codex/plugins) |
-| `skills/<name>/SKILL.md` | All | 7 engineering synced from `hermes/skills/`; 2 Tencent Cloud authored in bundle (DeFi data ships as CLIs, not skills) |
+| `skills/<name>/SKILL.md` | All | 7 engineering synced from `hermes/skills/`; 2 Tencent Cloud + 17 DeFi data authored in bundle |
 | `commands/*.md` | Claude, OpenClaw | YAML frontmatter: `name`, `description` |
 | `.cursor/commands/*.md` | Cursor slash commands | Same frontmatter |
 | `rules/*.mdc` | Cursor | `alwaysApply` / `globs` frontmatter |

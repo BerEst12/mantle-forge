@@ -116,7 +116,7 @@ npx mantle-deploy ./my-vault --network mantleSepolia
 npx mantle-report ./my-vault --out FINAL_REPORT.md
 ```
 
-DeFi data capabilities (Mantle Scan + Merchant Moe) are handled by the **7 DeFi data CLIs** — ask your agent directly:
+DeFi data capabilities are handled by the **17 DeFi data skills** (Mantle Scan, Merchant Moe, prices, TVL, yields, lending, mETH, wallet) — ask your agent directly:
 
 ```txt
 Show me the transaction history for 0xabc123...

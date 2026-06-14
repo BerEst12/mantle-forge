@@ -25,7 +25,7 @@ plugins/mantle-forge/
 ├── .cursor-plugin/plugin.json
 ├── .claude-plugin/plugin.json
 ├── .codex-plugin/plugin.json    # skills: "./skills/"
-├── skills/                      # 9 mantle-* skills (7 engineering + 2 Tencent Cloud)
+├── skills/                      # 26 mantle-* skills (7 engineering + 2 Tencent Cloud + 17 DeFi data)
 ├── commands/                    # Claude / OpenClaw workflows
 ├── .cursor/commands/            # Cursor slash commands
 ├── rules/                       # Cursor rules (.mdc)

@@ -60,6 +60,18 @@ What's the price impact?
 | Call LBQuoter on-chain | — | `eth_call` → `0x501b8AFd35df20f531fF45F6f695793AC3316c85` |
 | Show rate + impact | — | amountOut + priceImpact% |
 
+### Market overview
+
+```txt
+What's the TVL on Mantle, best yields, and current MNT price?
+```
+
+| Step | Skill | Source |
+|------|-------|--------|
+| TVL breakdown | `mantle-tvl-overview` | DefiLlama (`api.llama.fi/v2/chains`) |
+| Best APY | `mantle-yield-finder` | DefiLlama Yields (`yields.llama.fi/pools`) |
+| MNT price | `mantle-defi-prices` | DefiLlama coins (`coins.llama.fi`) |
+
 ### Wallet + whale activity
 
 ```txt

@@ -1,6 +1,6 @@
 # Skills
 
-**9 skills** ship **inside** Mantle Forge plugins — they are not installed separately. After `npm run plugin:<vendor>`, your agent discovers them through the plugin bundle (or Hermes native plugin). DeFi data capabilities are delivered as **7 deterministic CLIs** (see below), not skills.
+**26 skills** ship **inside** Mantle Forge plugins — they are not installed separately. After `npm run plugin:<vendor>`, your agent discovers them through the plugin bundle (or Hermes native plugin). Split: **7 engineering** + **2 Tencent Cloud** + **17 DeFi data** (see below).
 
 ## Smart-contract engineering skills
 
@@ -61,40 +61,60 @@ npx mantle-cos-upload ./my-vault --out reports/cos-upload.md
 
 > **Credentials:** [console.cloud.tencent.com/hunyuan](https://console.cloud.tencent.com/hunyuan) · [console.cloud.tencent.com/cam/capi](https://console.cloud.tencent.com/cam/capi)
 
-## DeFi data CLIs
+## DeFi data skills (17)
 
-DeFi data is **not** a skill layer — it ships as **7 deterministic CLIs** in `tools/mantle-scan/` and `tools/mantle-moe/`. Your agent invokes them directly (`npx mantle-*`); no API key required. Full reference: [CLI tools](./tools).
+Read-only Mantle market & on-chain data. **7** wrap the deterministic CLIs
+(`mantle-scan-*`, `mantle-moe-*`); **10** call public Mantle APIs directly
+(DefiLlama · CoinGecko · DexScreener · RPC) — no API key required.
 
-### Mantle Scan explorer (4)
+### Prices & market (4)
 
-| CLI | Purpose | Source |
-|-----|---------|--------|
-| `mantle-scan-tx` | Decode any transaction by hash | Mantlescan API |
-| `mantle-scan-contract` | Contract info, ABI, function signatures | Mantlescan API |
-| `mantle-tx-history` | Wallet tx history + gas summary | Mantlescan API |
-| `mantle-whale-tracker` | Large MNT transfers in recent blocks | Mantle RPC |
+| Skill | Purpose | Source |
+|-------|---------|--------|
+| `mantle-defi-prices` | Real-time token prices on Mantle (by address or id) | DefiLlama coins |
+| `mantle-token-info` | Price, volume, liquidity for any token | DexScreener |
+| `mantle-coingecko` | MNT price, market cap, 24h change | CoinGecko |
+| `mantle-gas-tracker` | Current gas price + tx cost in USD | Mantle RPC + CoinGecko |
 
-### Merchant Moe (3)
+### TVL & protocols (5)
 
-Uses **Liquidity Book 2.2** architecture.
+| Skill | Purpose | Source |
+|-------|---------|--------|
+| `mantle-tvl-overview` | Total Mantle TVL + top protocols | DefiLlama |
+| `mantle-protocol-stats` | TVL/chains/history for one protocol | DefiLlama |
+| `mantle-yield-finder` | Best APY opportunities on Mantle | DefiLlama Yields |
+| `mantle-lending-rates` | Supply APY / borrow APR (Lendle, INIT, Aave) | DefiLlama Yields |
+| `mantle-meth-info` | mETH liquid staking TVL + pools | DefiLlama |
 
-| CLI | Purpose | Source |
-|-----|---------|--------|
-| `mantle-moe-pools` | All pools ranked by TVL, volume, or APY | Moe subgraph / DefiLlama |
-| `mantle-moe-best-pool` | Best pool for a specific token pair | Moe subgraph / DefiLlama |
-| `mantle-moe-swap-quote` | Real-time swap quote via LBQuoter — no wallet needed | Mantle RPC (on-chain) |
+### Merchant Moe — CLI-backed (3)
 
-**Contracts used (Mantle mainnet):**
+Uses **Liquidity Book 2.2**. Contracts (Mantle mainnet): LB Quoter
+`0x501b8AFd35df20f531fF45F6f695793AC3316c85`, LB Router
+`0x013e138EF6008ae5FDFDE29700e3f2Bc61d21E3a`, LB Factory
+`0xa6630671775c4EA2743840F9A5016dCf2A104054`.
 
-| Contract | Address |
-|----------|---------|
-| LB Quoter | `0x501b8AFd35df20f531fF45F6f695793AC3316c85` |
-| LB Router | `0x013e138EF6008ae5FDFDE29700e3f2Bc61d21E3a` |
-| LB Factory | `0xa6630671775c4EA2743840F9A5016dCf2A104054` |
+| Skill | CLI | Purpose |
+|-------|-----|---------|
+| `mantle-moe-pools` | `mantle-moe-pools` | Pools ranked by liquidity/volume/APY |
+| `mantle-moe-best-pool` | `mantle-moe-best-pool` | Best pool for a token pair |
+| `mantle-moe-swap-quote` | `mantle-moe-swap-quote` | On-chain swap quote via LBQuoter |
 
-Source: [docs.merchantmoe.com/resources/contracts](https://docs.merchantmoe.com/resources/contracts)
+### Mantle Scan explorer — CLI-backed (4)
 
-**Engineering skills** (`hermes/skills/`) sync via `npm run plugin:sync-skills`. All **9 bundle skills** (7 engineering + 2 Tencent Cloud) live in `plugins/mantle-forge/skills/`. Hermes install copies the full bundle skills directory.
+| Skill | CLI | Purpose |
+|-------|-----|---------|
+| `mantle-scan-tx` | `mantle-scan-tx` | Decode any transaction by hash |
+| `mantle-scan-contract` | `mantle-scan-contract` | Contract info, ABI, signatures |
+| `mantle-tx-history` | `mantle-tx-history` | Wallet tx history + gas summary |
+| `mantle-whale-tracker` | `mantle-whale-tracker` | Large MNT transfers in recent blocks |
+
+### Wallet (1)
+
+| Skill | Purpose | Source |
+|-------|---------|--------|
+| `mantle-wallet-overview` | Portfolio: native MNT (RPC) + tokens/DeFi (Zerion, optional key) | Mantle RPC + Zerion |
+
+**Engineering skills** (`hermes/skills/`) sync via `npm run plugin:sync-skills`. All **26 bundle skills** (7 engineering + 2 Tencent Cloud + 17 DeFi data) live in `plugins/mantle-forge/skills/`. Hermes install copies the full bundle skills directory.
 
 ## How skills load per runtime
 
@@ -124,14 +144,15 @@ Add tests, run a security review, optimize gas where possible,
 deploy it to Mantle Sepolia, and generate an engineering report.
 ```
 
-DeFi data prompts (backed by the 7 CLIs):
+DeFi data prompts (backed by the 17 DeFi skills):
 
 ```txt
+What's the current price of MNT?
+What's the total TVL on Mantle, and the top protocols?
+Show me the best yield opportunities on Mantle right now.
 What are the top Merchant Moe pools by APY?
-What's the best Merchant Moe pool for MNT/USDC?
 How much USDC do I get for 100 MNT on Merchant Moe?
 Show me the transaction history for 0xabc123...
-Decode transaction 0xdef456... on Mantle.
 Are there any whale transactions on Mantle in the last hour?
 ```
 

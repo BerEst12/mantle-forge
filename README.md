@@ -162,7 +162,7 @@ Reproducible gas evidence: [`examples/demo-runs/gas-benchmark-before-after.md`](
 
 ### Skills library
 
-**9 skills** in the compatible plugin bundle — **7 engineering** + **2 Tencent Cloud**. Hermes native plugin ships the 7 engineering skills plus 6 Python tools. DeFi data is delivered as deterministic **CLIs** (see below), not skills.
+**26 skills** in the compatible plugin bundle — **7 engineering** + **2 Tencent Cloud** + **17 DeFi data**. Hermes native plugin ships the 7 engineering skills plus 6 Python tools. The 17 DeFi skills wrap the deterministic CLIs (7, Mantlescan + Merchant Moe) or call public Mantle APIs directly (10, DefiLlama · CoinGecko · DexScreener · RPC).
 
 #### Engineering (flagship workflow)
 
@@ -195,9 +195,9 @@ npx mantle-tencent-audit ./my-vault --provider openrouter --model tencent/hunyua
 npx mantle-cos-upload ./my-vault --out reports/cos-upload.md
 ```
 
-#### DeFi data (read-only, no deploy)
+#### DeFi data — 17 skills (read-only, no deploy)
 
-Prices, TVL, yields, lending, Merchant Moe pools/swap quotes, Mantlescan tx lookup, whale tracking — exposed as **7 DeFi data CLIs** (Mantlescan + Merchant Moe), invoked directly or by your agent. See [Tools docs](https://mantle-forge-0.vercel.app/docs/tools).
+Prices, token info, MNT market data, gas tracker, TVL, protocol stats, yields, lending rates, mETH, Merchant Moe pools/best-pool/swap-quote, Mantlescan tx/contract/history/whale, wallet overview. **7** wrap the deterministic CLIs (`mantle-scan-*`, `mantle-moe-*`); **10** call public Mantle APIs (DefiLlama · CoinGecko · DexScreener · RPC) — no key required. See [Skills docs](https://mantle-forge-0.vercel.app/docs/skills).
 
 ### CLI tools
 

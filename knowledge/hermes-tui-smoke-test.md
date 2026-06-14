@@ -37,7 +37,7 @@ Optional: confirm the path exists:
 ls hermes/skills/*/SKILL.md
 ```
 
-You should see 7 engineering skills (Hermes native plugin). The compatible bundle ships 9 skills total (7 engineering + 2 Tencent Cloud).
+You should see 7 engineering skills (Hermes native plugin). The compatible bundle ships 26 skills total (7 engineering + 2 Tencent Cloud + 17 DeFi data).
 
 ## 3. Preflight
 
