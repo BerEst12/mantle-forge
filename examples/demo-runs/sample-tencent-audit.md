@@ -1,5 +1,15 @@
 # Tencent Cloud Hunyuan — Deep Security Audit
 
+> ⚠️ **Illustrative sample** of the report `mantle-tencent-audit` produces for the
+> flagship `TokenVault`. Generate a live one against your own contracts with a
+> Tencent Hunyuan **or** OpenRouter key:
+> ```bash
+> export TENCENT_HUNYUAN_API_KEY=<key>     # or: export OPENROUTER_API_KEY=sk-or-<key>
+> npx mantle-tencent-audit ./my-vault --out reports/tencent-audit.md
+> ```
+> The tool calls the real Hunyuan API (`api.hunyuan.cloud.tencent.com`); without a
+> key it errors with setup instructions rather than emitting placeholder findings.
+
 _Powered by [Tencent Cloud Hunyuan](https://cloud.tencent.com/product/hunyuan) (hunyuan-pro) — AI-assisted security review. Not a substitute for a professional audit._
 
 **Overall risk level:** Low
