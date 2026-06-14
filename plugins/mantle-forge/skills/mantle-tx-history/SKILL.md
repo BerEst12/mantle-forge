@@ -41,7 +41,7 @@ Summarize recent txs (counterparty, value, method) and total gas spent.
 ## Output
 
 Recent transactions + aggregate gas summary.
-Source: Mantle Scan API.
+Source: Mantlescan explorer API. **Requires a free `MANTLE_EXPLORER_API_KEY`** (full wallet history needs an indexer — not available over plain RPC).
 
 ## Verification
 

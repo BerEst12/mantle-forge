@@ -40,7 +40,7 @@ Summarize status, value, gas used/cost, and the method called.
 ## Output
 
 From/to, value, success/failure, gas used + cost, decoded method.
-Source: Mantle Scan API.
+Source: Mantle JSON-RPC (`rpc.mantle.xyz`) — **keyless**, no API key needed.
 
 ## Verification
 
@@ -50,4 +50,4 @@ Source: Mantle Scan API.
 ## Pitfalls
 
 - A mainnet hash on `--network sepolia` (or vice-versa) returns "not found"
-- Set `MANTLE_EXPLORER_API_KEY` to avoid public rate limits on heavy use
+- Works over the public RPC with no key; `--network sepolia` for testnet

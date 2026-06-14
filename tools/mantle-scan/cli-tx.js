@@ -56,7 +56,7 @@ Gas used:    ${parseInt(tx.gasUsed, 10).toLocaleString()} / ${parseInt(tx.gas, 1
 Gas price:   ${(Number(tx.gasPrice) / 1e9).toFixed(4)} Gwei
 Tx fee:      ${formatWei(String(BigInt(tx.gasUsed || 0) * BigInt(tx.gasPrice || 0)))}
 
-Explorer: https://explorer${network === "sepolia" ? ".sepolia" : ""}.mantle.xyz/tx/${tx.hash}
+Explorer: https://${network === "sepolia" ? "sepolia." : ""}mantlescan.xyz/tx/${tx.hash}
 `);
   return 0;
 }

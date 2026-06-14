@@ -28,6 +28,48 @@ function get(url) {
   });
 }
 
+// Mantle JSON-RPC — public, keyless. Used by tx lookup and whale tracking,
+// which need no indexer (the explorer/Etherscan API is only required for
+// verified-source ABI and full wallet history).
+const RPC_URLS = {
+  mainnet: "https://rpc.mantle.xyz",
+  sepolia: "https://rpc.sepolia.mantle.xyz",
+};
+
+function rpcCall(method, params, network = "mainnet") {
+  return new Promise((resolve, reject) => {
+    const body = JSON.stringify({ jsonrpc: "2.0", id: 1, method, params });
+    const u = new URL(RPC_URLS[network] || RPC_URLS.mainnet);
+    const req = https.request(
+      {
+        hostname: u.hostname,
+        path: u.pathname,
+        method: "POST",
+        headers: { "Content-Type": "application/json", "Content-Length": Buffer.byteLength(body) },
+      },
+      (res) => {
+        let data = "";
+        res.on("data", (c) => (data += c));
+        res.on("end", () => {
+          try {
+            const r = JSON.parse(data);
+            if (r.error) reject(new Error(r.error.message || "RPC error"));
+            else resolve(r.result);
+          } catch (e) {
+            reject(new Error(`RPC parse error: ${e.message}`));
+          }
+        });
+      }
+    );
+    req.on("error", reject);
+    req.write(body);
+    req.end();
+  });
+}
+
+/** Hex quantity → decimal string (matches the old Etherscan-style API shape). */
+const hexToDec = (h) => (h == null ? "0" : BigInt(h).toString());
+
 /**
  * Build Mantle Scan API URL.
  * Uses MANTLE_EXPLORER_API_KEY env var if set (higher rate limits).
@@ -40,13 +82,34 @@ function buildUrl(network, params) {
 }
 
 /**
- * Fetch transaction details by hash.
+ * Fetch transaction details by hash — via Mantle JSON-RPC (keyless).
+ * Returns the same field shape the CLI expects (decimal strings).
  */
 async function getTx(txHash, network = "mainnet") {
-  const url = buildUrl(network, { module: "transaction", action: "gettxinfo", txhash: txHash });
-  const res = await get(url);
-  if (res.status !== "1") throw new Error(res.message || res.result || "API error");
-  return res.result;
+  const tx = await rpcCall("eth_getTransactionByHash", [txHash], network);
+  if (!tx) throw new Error("Transaction not found — check the hash and --network (mainnet/sepolia)");
+
+  const receipt = await rpcCall("eth_getTransactionReceipt", [txHash], network);
+
+  let timeStamp = "0";
+  if (tx.blockNumber) {
+    const block = await rpcCall("eth_getBlockByNumber", [tx.blockNumber, false], network);
+    if (block && block.timestamp) timeStamp = hexToDec(block.timestamp);
+  }
+
+  return {
+    hash: tx.hash,
+    from: tx.from,
+    to: tx.to,
+    value: hexToDec(tx.value),
+    input: tx.input,
+    blockNumber: tx.blockNumber ? hexToDec(tx.blockNumber) : "0",
+    gas: hexToDec(tx.gas),
+    gasPrice: hexToDec(tx.gasPrice),
+    gasUsed: receipt ? hexToDec(receipt.gasUsed) : "0",
+    txreceipt_status: receipt ? (BigInt(receipt.status) === 1n ? "1" : "0") : "",
+    timeStamp,
+  };
 }
 
 /**
@@ -91,51 +154,48 @@ async function getTxHistory(address, { network = "mainnet", page = 1, offset = 2
 }
 
 /**
- * Fetch large transactions above a threshold (whale tracker).
+ * Detect large native-MNT transfers in recent blocks (whale tracker) —
+ * via Mantle JSON-RPC (keyless). MNT is the native gas token, so large
+ * transfers appear as `tx.value` on regular transactions.
  */
 async function getWhaleTransactions(network = "mainnet", minValueEth = 10, limit = 20) {
-  // Get latest block number
-  const blockRes = await get(
-    buildUrl(network, { module: "proxy", action: "eth_blockNumber" })
-  );
-  const latestBlock = parseInt(blockRes.result, 16);
-  const fromBlock = Math.max(0, latestBlock - 1000);
-
-  const url = buildUrl(network, {
-    module: "account",
-    action: "txlist",
-    address: "0x0000000000000000000000000000000000000000",
-    startblock: fromBlock,
-    endblock: latestBlock,
-    page: 1,
-    offset: 200,
-    sort: "desc",
-  });
-
-  // Whale tracker works better by fetching token transfers above threshold
-  const tokenUrl = buildUrl(network, {
-    module: "account",
-    action: "tokentx",
-    address: "0x78c1b0C915c4FAA5FffA6CAbf0219DA63d7f4cb", // MNT token
-    startblock: fromBlock,
-    endblock: latestBlock,
-    page: 1,
-    offset: 200,
-    sort: "desc",
-  });
-
-  const res = await get(tokenUrl);
-  const txs = Array.isArray(res.result) ? res.result : [];
+  const WINDOW = 30; // recent blocks to scan
+  const latest = parseInt(await rpcCall("eth_blockNumber", [], network), 16);
   const minValueWei = BigInt(Math.floor(minValueEth * 1e18));
 
-  return txs
-    .filter((tx) => {
+  const blockNums = [];
+  for (let n = latest; n > latest - WINDOW && n >= 0; n--) blockNums.push(n);
+
+  const blocks = await Promise.all(
+    blockNums.map((n) =>
+      rpcCall("eth_getBlockByNumber", ["0x" + n.toString(16), true], network).catch(() => null)
+    )
+  );
+
+  const found = [];
+  for (const block of blocks) {
+    if (!block || !Array.isArray(block.transactions)) continue;
+    const ts = block.timestamp ? hexToDec(block.timestamp) : "0";
+    for (const tx of block.transactions) {
       try {
-        return BigInt(tx.value) >= minValueWei;
+        if (BigInt(tx.value) >= minValueWei) {
+          found.push({
+            hash: tx.hash,
+            from: tx.from,
+            to: tx.to,
+            value: BigInt(tx.value).toString(),
+            timeStamp: ts,
+            tokenSymbol: "MNT",
+          });
+        }
       } catch {
-        return false;
+        /* skip malformed tx */
       }
-    })
+    }
+  }
+
+  return found
+    .sort((a, b) => (BigInt(b.value) > BigInt(a.value) ? 1 : -1))
     .slice(0, limit);
 }
 

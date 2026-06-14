@@ -40,7 +40,7 @@ Report name, verification status, and key functions.
 ## Output
 
 Contract name, verified/unverified, compiler, function signatures, optional ABI.
-Source: Mantle Scan API.
+Source: Mantlescan explorer API. **Requires a free `MANTLE_EXPLORER_API_KEY`** (verified-source ABI/metadata needs an indexer — not available over plain RPC).
 
 ## Verification
 

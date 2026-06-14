@@ -2,8 +2,7 @@
 "use strict";
 
 const { parseArgs, fail, printJson } = require("@mantle-forge/cli-utils");
-const { getTxHistory, formatWei, formatTime, buildUrl } = require("./lib/scan");
-const https = require("https");
+const { getWhaleTransactions, formatWei, formatTime } = require("./lib/scan");
 
 function printHelp() {
   console.log(`Usage: mantle-whale-tracker [--min-value N] [--network mainnet|sepolia] [--address 0x...] [--json]
@@ -23,52 +22,30 @@ Example:
 `);
 }
 
-function get(url) {
-  return new Promise((resolve, reject) => {
-    https.get(url, (res) => {
-      let data = "";
-      res.on("data", (c) => (data += c));
-      res.on("end", () => { try { resolve(JSON.parse(data)); } catch (e) { reject(e); } });
-    }).on("error", reject);
-  });
-}
-
 async function main(argv) {
-  const { positional, flags } = parseArgs(argv);
+  const { flags } = parseArgs(argv);
   if (flags.help || flags.h) { printHelp(); return 0; }
 
   const network = flags.network || "mainnet";
   const minValue = parseFloat(flags["min-value"] || "10000");
   const limit = parseInt(flags.limit || "20", 10);
-  const watchAddress = flags.address || null;
+  const watchAddress = flags.address ? flags.address.toLowerCase() : null;
 
-  console.log(`Scanning Mantle ${network} for transactions ≥ ${minValue.toLocaleString()} MNT...`);
+  console.log(`Scanning Mantle ${network} for native MNT transfers ≥ ${minValue.toLocaleString()} MNT...`);
 
-  let txs = [];
-
-  if (watchAddress) {
-    // Watch specific address
-    txs = await getTxHistory(watchAddress, { network, offset: 100 });
-  } else {
-    // Scan recent MNT token transfers
-    const url = buildUrl(network, {
-      module: "account",
-      action: "tokentx",
-      contractaddress: "0x78c1b0C915c4FAA5FffA6CAbf0219DA63d7f4cb",
-      page: 1,
-      offset: 200,
-      sort: "desc",
-    });
-    const res = await get(url);
-    txs = Array.isArray(res.result) ? res.result : [];
+  // Keyless: scan recent blocks over the Mantle RPC for large native-MNT transfers.
+  let whales;
+  try {
+    whales = await getWhaleTransactions(network, minValue, watchAddress ? 500 : limit);
+  } catch (e) {
+    return fail(`Could not scan blocks: ${e.message}`);
   }
 
-  const minValueWei = BigInt(Math.floor(minValue * 1e18));
-  const whales = txs
-    .filter((tx) => {
-      try { return BigInt(tx.value) >= minValueWei; } catch { return false; }
-    })
-    .slice(0, limit);
+  if (watchAddress) {
+    whales = whales
+      .filter((tx) => (tx.from || "").toLowerCase() === watchAddress || (tx.to || "").toLowerCase() === watchAddress)
+      .slice(0, limit);
+  }
 
   if (flags.json) { printJson(whales); return 0; }
 
@@ -86,7 +63,7 @@ async function main(argv) {
     console.log(`🐋 ${time}  ${val.padEnd(25)}  ${tx.from.slice(0, 10)}... → ${(tx.to || "").slice(0, 10)}...  ${hash}`);
   }
 
-  console.log(`\nExplorer: https://explorer${network === "sepolia" ? ".sepolia" : ""}.mantle.xyz`);
+  console.log(`\nExplorer: https://${network === "sepolia" ? "sepolia." : ""}mantlescan.xyz`);
   return 0;
 }
 
