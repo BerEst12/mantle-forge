@@ -38,8 +38,8 @@ Report the chosen pool, its TVL, volume, and APY, and why it ranks best.
 
 ## Output
 
-The top pool for the pair with address, TVL, volume, APY.
-Source: Merchant Moe subgraph / DefiLlama.
+The top pool for the pair with address, TVL, and 24h volume.
+Source: GeckoTerminal (Merchant Moe) — public, keyless.
 
 ## Verification
 

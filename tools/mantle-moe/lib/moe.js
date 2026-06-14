@@ -2,124 +2,91 @@
 
 const https = require("https");
 
-// Merchant Moe subgraph on Mantle (The Graph)
-const SUBGRAPH_URL =
-  "https://api.thegraph.com/subgraphs/name/merchant-moe/merchant-moe-mantle";
-
-// Fallback: DefiLlama for Merchant Moe pools
-const DEFILLAMA_POOLS_URL = "https://yields.llama.fi/pools";
-
-/**
- * Execute a GraphQL query against the Merchant Moe subgraph.
- */
-function querySubgraph(query) {
-  return new Promise((resolve, reject) => {
-    const body = JSON.stringify({ query });
-    const url = new URL(SUBGRAPH_URL);
-    const options = {
-      hostname: url.hostname,
-      path: url.pathname,
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Content-Length": Buffer.byteLength(body),
-      },
-    };
-    const req = https.request(options, (res) => {
-      let data = "";
-      res.on("data", (c) => (data += c));
-      res.on("end", () => {
-        try {
-          const parsed = JSON.parse(data);
-          if (parsed.errors) reject(new Error(parsed.errors[0].message));
-          else resolve(parsed.data);
-        } catch (e) {
-          reject(new Error(`Parse error: ${e.message}`));
-        }
-      });
-    });
-    req.on("error", reject);
-    req.write(body);
-    req.end();
-  });
-}
+// Merchant Moe pool data via GeckoTerminal (CoinGecko's on-chain DEX API).
+// Public, keyless. Covers both the classic AMM and the Liquidity Book DEX on Mantle.
+// (The legacy Graph hosted-service subgraph was shut down in 2024.)
+const GECKOTERMINAL_BASE = "https://api.geckoterminal.com/api/v2";
+const MOE_DEXES = ["merchant-moe-liquidity-book-mantle", "merchant-moe-mantle"];
 
 /**
- * GET request helper for REST endpoints.
+ * GET a JSON-API resource (GeckoTerminal). Sends an Accept header and surfaces
+ * HTTP/JSON errors rather than silently returning HTML.
  */
 function get(url) {
   return new Promise((resolve, reject) => {
-    https.get(url, (res) => {
-      let data = "";
-      res.on("data", (c) => (data += c));
-      res.on("end", () => {
-        try { resolve(JSON.parse(data)); }
-        catch (e) { reject(new Error(`JSON parse error: ${e.message}`)); }
-      });
-    }).on("error", reject);
+    const u = new URL(url);
+    const options = {
+      hostname: u.hostname,
+      path: u.pathname + u.search,
+      method: "GET",
+      headers: { Accept: "application/json", "User-Agent": "mantle-forge" },
+    };
+    https
+      .get(options, (res) => {
+        let data = "";
+        res.on("data", (c) => (data += c));
+        res.on("end", () => {
+          if (res.statusCode >= 400) {
+            return reject(new Error(`HTTP ${res.statusCode} from ${u.hostname}`));
+          }
+          try {
+            resolve(JSON.parse(data));
+          } catch (e) {
+            reject(new Error(`JSON parse error: ${e.message}`));
+          }
+        });
+      })
+      .on("error", reject);
   });
 }
 
+/** Map one GeckoTerminal pool resource to our pool shape. */
+function mapGtPool(p) {
+  const a = p.attributes || {};
+  const name = a.name || "";
+  const [token0 = "", token1 = ""] = name.split(" / ");
+  const tx = (a.transactions && a.transactions.h24) || {};
+  return {
+    id: a.address || p.id,
+    symbol: name.replace(" / ", "/"),
+    token0,
+    token1,
+    liquidityUSD: parseFloat(a.reserve_in_usd || 0),
+    volumeUSD: parseFloat((a.volume_usd && a.volume_usd.h24) || 0),
+    txCount: (parseInt(tx.buys || 0) || 0) + (parseInt(tx.sells || 0) || 0),
+    apy: null, // GeckoTerminal does not expose pool APY
+    source: "geckoterminal",
+  };
+}
+
 /**
- * Fetch Merchant Moe pools via subgraph.
- * Falls back to DefiLlama if subgraph is unavailable.
+ * Fetch Merchant Moe pools on Mantle from GeckoTerminal (both Moe DEXes),
+ * sorted by liquidity (default) or 24h volume.
  */
 async function getPools({ limit = 20, orderBy = "reserveUSD" } = {}) {
-  try {
-    const data = await querySubgraph(`{
-      pairs(first: ${limit}, orderBy: ${orderBy}, orderDirection: desc) {
-        id
-        token0 { symbol decimals }
-        token1 { symbol decimals }
-        reserveUSD
-        volumeUSD
-        txCount
-        token0Price
-        token1Price
-      }
-    }`);
-    return (data.pairs || []).map((p) => ({
-      id: p.id,
-      symbol: `${p.token0.symbol}/${p.token1.symbol}`,
-      token0: p.token0.symbol,
-      token1: p.token1.symbol,
-      liquidityUSD: parseFloat(p.reserveUSD || 0),
-      volumeUSD: parseFloat(p.volumeUSD || 0),
-      txCount: parseInt(p.txCount || 0),
-      price0: parseFloat(p.token0Price || 0),
-      price1: parseFloat(p.token1Price || 0),
-      source: "subgraph",
-    }));
-  } catch {
-    // Fallback to DefiLlama
-    return getPoolsFromDefiLlama(limit);
+  const results = await Promise.allSettled(
+    MOE_DEXES.map((dex) =>
+      get(`${GECKOTERMINAL_BASE}/networks/mantle/dexes/${dex}/pools?page=1`)
+    )
+  );
+
+  let pools = [];
+  for (const r of results) {
+    if (r.status === "fulfilled" && r.value && Array.isArray(r.value.data)) {
+      pools.push(...r.value.data.map(mapGtPool));
+    }
   }
+  if (pools.length === 0) {
+    throw new Error("no pools returned from GeckoTerminal");
+  }
+
+  const key = orderBy === "volumeUSD" ? "volumeUSD" : "liquidityUSD";
+  pools.sort((a, b) => (b[key] || 0) - (a[key] || 0));
+  return pools.slice(0, limit);
 }
 
-/**
- * DefiLlama fallback for Merchant Moe pools.
- */
-async function getPoolsFromDefiLlama(limit = 20) {
-  const data = await get(DEFILLAMA_POOLS_URL);
-  const pools = (data.data || [])
-    .filter((p) => p.chain === "Mantle" && p.project === "merchant-moe")
-    .sort((a, b) => (b.tvlUsd || 0) - (a.tvlUsd || 0))
-    .slice(0, limit);
-
-  return pools.map((p) => ({
-    id: p.pool,
-    symbol: p.symbol,
-    token0: p.symbol.split("-")[0] || "",
-    token1: p.symbol.split("-")[1] || "",
-    liquidityUSD: p.tvlUsd || 0,
-    volumeUSD: 0,
-    apy: p.apy || 0,
-    apyBase: p.apyBase || 0,
-    apyReward: p.apyReward || 0,
-    txCount: 0,
-    source: "defillama",
-  }));
-}
+// Backwards-compatible alias (kept so existing imports/tests don't break).
+const getPoolsFromDefiLlama = (limit = 20) => getPools({ limit });
 
 /**
  * Find best pool for a given token pair.
@@ -156,5 +123,6 @@ module.exports = {
   getBestPool,
   getPoolsFromDefiLlama,
   formatUSD,
-  SUBGRAPH_URL,
+  GECKOTERMINAL_BASE,
+  MOE_DEXES,
 };

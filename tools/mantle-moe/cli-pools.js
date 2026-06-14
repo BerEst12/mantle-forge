@@ -45,7 +45,7 @@ async function main(argv) {
   if (flags.json) { printJson(pools); return 0; }
 
   console.log(`\nMerchant Moe — Top ${pools.length} Pools on Mantle`);
-  console.log(`Source: ${pools[0]?.source === "defillama" ? "DefiLlama" : "Subgraph"}\n`);
+  console.log(`Source: GeckoTerminal (Merchant Moe AMM + Liquidity Book)\n`);
   console.log(`${"#".padEnd(4)} ${"Pool".padEnd(22)} ${"Liquidity".padEnd(12)} ${"Volume 24h".padEnd(12)} ${"APY".padEnd(8)} Txs`);
   console.log("─".repeat(72));
 

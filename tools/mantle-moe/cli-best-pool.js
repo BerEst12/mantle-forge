@@ -50,7 +50,7 @@ Liquidity:  ${formatUSD(best.liquidityUSD)}
 ${best.apy ? `APY:        ${best.apy.toFixed(2)}%` : ""}${best.apyBase ? `\nBase APY:   ${best.apyBase.toFixed(2)}%` : ""}${best.apyReward ? `\nReward APY: ${best.apyReward.toFixed(2)}%` : ""}
 ${best.volumeUSD ? `Volume 24h: ${formatUSD(best.volumeUSD)}` : ""}
 Pool ID:    ${best.id}
-Source:     ${best.source === "defillama" ? "DefiLlama" : "Merchant Moe Subgraph"}
+Source:     GeckoTerminal (Merchant Moe)
 `);
 
   if (matches.length > 1) {

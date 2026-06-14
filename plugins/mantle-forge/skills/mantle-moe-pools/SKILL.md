@@ -40,8 +40,8 @@ Then summarize the top pools (pair, TVL, volume, APY) for the user.
 
 ## Output
 
-Ranked table of pools with pair, liquidity/TVL, 24h volume, and APY.
-Source: Merchant Moe subgraph / DefiLlama.
+Ranked table of pools with pair, liquidity/TVL, 24h volume, and tx count.
+Source: GeckoTerminal (Merchant Moe AMM + Liquidity Book) — public, keyless.
 
 ## Verification
 

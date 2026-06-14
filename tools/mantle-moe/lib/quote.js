@@ -30,7 +30,8 @@ function keccak256Selector(sig) {
   // findBestPathFromAmountIn(address[],uint128) = 0x...
   // Precomputed:
   const KNOWN = {
-    "findBestPathFromAmountIn(address[],uint128)": "0x8a3eb1b2",
+    // keccak256("findBestPathFromAmountIn(address[],uint128)")[0:4]
+    "findBestPathFromAmountIn(address[],uint128)": "0x0f902a40",
     "decimals()": "0x313ce567",
     "symbol()":   "0x95d89b41",
   };
