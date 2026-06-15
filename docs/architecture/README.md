@@ -1,9 +1,21 @@
-# Mantle Forge architecture
+# Mantle Forge — Architecture
 
-Visual architecture for the hackathon submission and docs site.
+![Mantle Forge Architecture](./mantle-forge-architecture.svg)
 
-| Artifact | Description |
-|----------|-------------|
-| [mantle-forge-architecture.drawio](./mantle-forge-architecture.drawio) | Layered draw.io source (agents → installer → plugins → CLIs → templates → Mantle Sepolia) |
+Plugin para agentes de IA que permite construir, auditar y desplegar contratos inteligentes en Mantle Sepolia, con acceso a 19 skills de datos DeFi en vivo.
 
-Open the `.drawio` file in [draw.io desktop](https://github.com/jgraph/drawio-desktop/releases) or diagrams.net. PNG export requires the desktop CLI (`drawio --export`).
+## Flujo
+
+| Columna | Qué hace |
+|---------|----------|
+| **Agentes de IA** | Hermes, Claude Code, Cursor, Codex, OpenClaw, OpenCode instalan el plugin una vez |
+| **Pipeline de ingeniería** | 7 skills en secuencia: scaffold → check → audit → gas → harden → deploy → report |
+| **Datos DeFi en vivo** | 19 skills: precios MNT, TVL, Merchant Moe, whale tracker, Mantlescan, Tencent Hunyuan AI, COS |
+| **Mantle Sepolia** | Destino de despliegue (Chain ID 5003) + APIs externas consultadas |
+
+## Archivos
+
+| Archivo | Descripción |
+|---------|-------------|
+| [`mantle-forge-architecture.svg`](./mantle-forge-architecture.svg) | Diagrama principal — fuente de verdad |
+| [`mantle-forge-architecture-v2.drawio`](./mantle-forge-architecture-v2.drawio) | Fuente editable en draw.io |
