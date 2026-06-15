@@ -40,7 +40,7 @@ async function main(argv) {
   if (flags.json) { printJson(txs); return 0; }
 
   if (!txs.length) {
-    console.log(`No transactions found for ${address} on Mantle ${network}`);
+    console.log(`No transactions for ${address} in recent Mantle ${network} blocks (keyless RPC scan).`);
     return 0;
   }
 
@@ -56,7 +56,7 @@ async function main(argv) {
   console.log(`
 Transaction History: ${address}
 Network: Mantle ${network}
-Showing: ${txs.length} most recent transactions
+Showing: ${txs.length} txs from recent blocks (keyless RPC — not full history)
 
 Summary:
   Sent:           ${sent.length} txs
@@ -79,7 +79,7 @@ ${"─".repeat(100)}`);
     console.log(`${status} ${direction} ${time}  ${hash}  ${val.padEnd(20)} ${isCall ? "[call]" : "      "} ${counterpart}`);
   }
 
-  console.log(`\nExplorer: https://explorer${network === "sepolia" ? ".sepolia" : ""}.mantle.xyz/address/${address}`);
+  console.log(`\nExplorer: https://${network === "sepolia" ? "sepolia." : ""}mantlescan.xyz/address/${address}`);
   return 0;
 }
 

@@ -2,21 +2,22 @@
 "use strict";
 
 const { parseArgs, fail, printJson } = require("@mantle-forge/cli-utils");
-const { getContractAbi, getContractSource } = require("./lib/scan");
+const { getContractInfo } = require("./lib/scan");
 
 function printHelp() {
-  console.log(`Usage: mantle-scan-contract <address> [--network mainnet|sepolia] [--abi] [--json]
+  console.log(`Usage: mantle-scan-contract <address> [--network mainnet|sepolia] [--json]
 
-Fetch verified contract info from Mantle Scan.
+Inspect a contract on Mantle via the public RPC (keyless): confirms it is a
+contract, shows the bytecode size, and lists the function selectors found in the
+bytecode, resolved to signatures via 4byte.directory.
 
 Options:
   --network   mainnet (default) or sepolia
-  --abi       Show full ABI instead of summary
   --json      Output raw JSON
 
 Example:
   mantle-scan-contract 0xabc123...
-  mantle-scan-contract 0xabc123... --abi
+  mantle-scan-contract 0xabc123... --network sepolia
 `);
 }
 
@@ -29,59 +30,40 @@ async function main(argv) {
 
   const network = flags.network || "mainnet";
 
-  let source, abi;
+  let info;
   try {
-    source = await getContractSource(address, network);
+    info = await getContractInfo(address, network);
   } catch (e) {
-    return fail(`Could not fetch contract: ${e.message}`);
+    return fail(`Could not inspect contract: ${e.message}`);
   }
 
-  const isVerified = source.ABI && source.ABI !== "Contract source code not verified";
+  if (flags.json) { printJson({ network, ...info }); return 0; }
 
-  if (flags.json) {
-    printJson({ address, network, verified: isVerified, source });
+  console.log(`
+Contract:     ${address}
+Network:      Mantle ${network}
+Is contract:  ${info.isContract ? "✅ Yes" : "❌ No (EOA / no bytecode)"}`);
+
+  if (!info.isContract) {
+    console.log(`\nNo bytecode at this address on Mantle ${network}.\n`);
     return 0;
   }
 
-  console.log(`
-Contract:    ${address}
-Network:     Mantle ${network}
-Name:        ${source.ContractName || "Unknown"}
-Verified:    ${isVerified ? "✅ Yes" : "❌ Not verified"}
-Compiler:    ${source.CompilerVersion || "N/A"}
-License:     ${source.LicenseType || "N/A"}
-Proxy:       ${source.Proxy === "1" ? `Yes → impl ${source.Implementation}` : "No"}
-
-Explorer: https://explorer${network === "sepolia" ? ".sepolia" : ""}.mantle.xyz/address/${address}
+  console.log(`Bytecode:     ${info.bytecodeSize.toLocaleString()} bytes
+Functions:    ${info.functions.length} detected (from bytecode selectors)
 `);
 
-  if (isVerified && flags.abi) {
-    try {
-      abi = await getContractAbi(address, network);
-      const functions = abi.filter((x) => x.type === "function");
-      const events = abi.filter((x) => x.type === "event");
-      console.log(`ABI Summary: ${functions.length} functions, ${events.length} events\n`);
-      console.log("Functions:");
-      for (const fn of functions) {
-        const inputs = (fn.inputs || []).map((i) => `${i.type} ${i.name}`).join(", ");
-        const outputs = (fn.outputs || []).map((o) => o.type).join(", ");
-        const mut = fn.stateMutability || fn.constant ? "view" : "nonpayable";
-        console.log(`  ${fn.name}(${inputs}) → (${outputs})  [${mut}]`);
-      }
-      if (events.length) {
-        console.log("\nEvents:");
-        for (const ev of events) {
-          const inputs = (ev.inputs || []).map((i) => `${i.type} ${i.name}`).join(", ");
-          console.log(`  ${ev.name}(${inputs})`);
-        }
-      }
-    } catch (e) {
-      console.log(`ABI: ${e.message}`);
+  if (info.functions.length) {
+    console.log("Detected functions:");
+    for (const fn of info.functions) {
+      console.log(`  ${fn.selector}  ${fn.signature}`);
     }
-  } else if (isVerified) {
-    console.log("Tip: Use --abi to see function signatures");
+  } else {
+    console.log("No known function selectors resolved (may be a proxy or minimal contract).");
   }
 
+  console.log(`\nExplorer: https://${network === "sepolia" ? "sepolia." : ""}mantlescan.xyz/address/${address}`);
+  console.log(`Note: bytecode/selectors are on-chain truth (keyless). Verified source/ABI needs a Mantlescan key.\n`);
   return 0;
 }
 

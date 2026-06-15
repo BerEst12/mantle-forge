@@ -112,45 +112,107 @@ async function getTx(txHash, network = "mainnet") {
   };
 }
 
-/**
- * Fetch contract ABI.
- */
-async function getContractAbi(address, network = "mainnet") {
-  const url = buildUrl(network, { module: "contract", action: "getabi", address });
-  const res = await get(url);
-  if (res.status !== "1") throw new Error(res.message || res.result || "ABI not found");
-  return JSON.parse(res.result);
-}
-
-/**
- * Fetch contract source info.
- */
-async function getContractSource(address, network = "mainnet") {
-  const url = buildUrl(network, { module: "contract", action: "getsourcecode", address });
-  const res = await get(url);
-  if (res.status !== "1") throw new Error(res.message || res.result || "Source not found");
-  return res.result[0];
-}
-
-/**
- * Fetch transaction history for an address.
- */
-async function getTxHistory(address, { network = "mainnet", page = 1, offset = 20, sort = "desc" } = {}) {
-  const url = buildUrl(network, {
-    module: "account",
-    action: "txlist",
-    address,
-    startblock: 0,
-    endblock: 99999999,
-    page,
-    offset,
-    sort,
+/** Resolve a 4-byte selector to a function signature via the public 4byte.directory (keyless, best-effort). */
+function resolve4byte(selector) {
+  return new Promise((resolve) => {
+    https
+      .get(
+        {
+          hostname: "www.4byte.directory",
+          path: `/api/v1/signatures/?hex_signature=${selector}`,
+          headers: { Accept: "application/json", "User-Agent": "mantle-forge" },
+        },
+        (res) => {
+          let d = "";
+          res.on("data", (c) => (d += c));
+          res.on("end", () => {
+            try {
+              const r = (JSON.parse(d).results || []).sort((a, b) => a.id - b.id);
+              resolve(r.length ? r[0].text_signature : null);
+            } catch {
+              resolve(null);
+            }
+          });
+        }
+      )
+      .on("error", () => resolve(null));
   });
-  const res = await get(url);
-  if (res.status !== "1" && res.message !== "No transactions found") {
-    throw new Error(res.message || res.result || "API error");
+}
+
+/**
+ * Inspect a contract — keyless, via Mantle JSON-RPC `eth_getCode`. Returns whether
+ * the address is a contract, its bytecode size, and the function selectors found in
+ * the bytecode (resolved to signatures via 4byte.directory, best-effort). Verified
+ * source/ABI needs an indexer (Mantlescan key) — this gives the on-chain truth keyless.
+ */
+async function getContractInfo(address, network = "mainnet") {
+  const code = await rpcCall("eth_getCode", [address, "latest"], network);
+  if (!code || code === "0x") {
+    return { address, isContract: false, bytecodeSize: 0, functions: [] };
   }
-  return Array.isArray(res.result) ? res.result : [];
+  const b = code.slice(2);
+  const candidates = new Set();
+  for (let i = 0; i + 10 <= b.length; i += 2) {
+    if (b.slice(i, i + 2) === "63") candidates.add("0x" + b.slice(i + 2, i + 10)); // PUSH4
+  }
+  const selectors = [...candidates].slice(0, 48);
+  const resolved = await Promise.all(
+    selectors.map(async (s) => ({ selector: s, signature: await resolve4byte(s) }))
+  );
+  const functions = resolved
+    .filter((r) => r.signature)
+    .sort((a, b) => a.signature.localeCompare(b.signature));
+  return { address, isContract: true, bytecodeSize: b.length / 2, functions };
+}
+
+/**
+ * Recent transaction history for a wallet — keyless, via Mantle JSON-RPC. Scans the
+ * last `window` blocks for transactions involving the address. Note: this is RECENT
+ * activity, not full history (full history needs an indexer / Mantlescan key).
+ */
+async function getTxHistory(address, { network = "mainnet", offset = 20, limit, window = 60 } = {}) {
+  const cap = limit || offset || 20;
+  const addr = address.toLowerCase();
+  const latest = parseInt(await rpcCall("eth_blockNumber", [], network), 16);
+
+  const nums = [];
+  for (let n = latest; n > latest - window && n >= 0; n--) nums.push(n);
+  const blocks = await Promise.all(
+    nums.map((n) =>
+      rpcCall("eth_getBlockByNumber", ["0x" + n.toString(16), true], network).catch(() => null)
+    )
+  );
+
+  const matches = [];
+  for (const block of blocks) {
+    if (!block || !Array.isArray(block.transactions)) continue;
+    const ts = block.timestamp ? hexToDec(block.timestamp) : "0";
+    for (const tx of block.transactions) {
+      if ((tx.from || "").toLowerCase() === addr || (tx.to || "").toLowerCase() === addr) {
+        matches.push({ tx, ts });
+      }
+    }
+  }
+
+  const capped = matches.slice(0, cap);
+  return Promise.all(
+    capped.map(async ({ tx, ts }) => {
+      const r = await rpcCall("eth_getTransactionReceipt", [tx.hash], network).catch(() => null);
+      return {
+        hash: tx.hash,
+        from: tx.from,
+        to: tx.to,
+        value: hexToDec(tx.value),
+        input: tx.input,
+        blockNumber: hexToDec(tx.blockNumber),
+        gas: hexToDec(tx.gas),
+        gasPrice: hexToDec(tx.gasPrice),
+        gasUsed: r ? hexToDec(r.gasUsed) : "0",
+        txreceipt_status: r ? (BigInt(r.status) === 1n ? "1" : "0") : "",
+        timeStamp: ts,
+      };
+    })
+  );
 }
 
 /**
@@ -224,8 +286,7 @@ function formatTime(unixStr) {
 
 module.exports = {
   getTx,
-  getContractAbi,
-  getContractSource,
+  getContractInfo,
   getTxHistory,
   getWhaleTransactions,
   formatWei,

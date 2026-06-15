@@ -1,24 +1,26 @@
 ---
 name: mantle-scan-contract
-description: Fetch verified contract info, ABI, and function signatures from Mantle Scan.
-version: 1.0.0
+description: Inspect a Mantle contract keyless via RPC — is-contract, bytecode size, and function signatures from the bytecode.
+version: 1.1.0
 platforms: [linux, macos, windows]
 metadata:
   hermes:
-    tags: [mantle, explorer, mantlescan, contract, abi]
+    tags: [mantle, explorer, contract, bytecode, rpc]
     category: mantle-forge
     requires_toolsets: [terminal]
 ---
 
 # Mantle Scan — Contract Info
 
-Fetches verified contract information from Mantle Scan: name, verification
-status, ABI, and function signatures. Works on mainnet and Sepolia.
+Inspects a contract on Mantle **keyless**, straight from the chain: confirms the
+address holds bytecode, reports its size, and lists the **function selectors**
+found in the bytecode, resolved to signatures via 4byte.directory. Works on
+mainnet and Sepolia.
 
 ## When to Use
 
-- User asks "what is this contract", "is it verified", "show the ABI/functions"
-- Inspecting a contract before interacting with it
+- User asks "is this a contract", "what functions does it have", "inspect 0x…"
+- Sanity-checking a contract before interacting with it — no API key needed
 
 ## Inputs
 
@@ -31,23 +33,26 @@ status, ABI, and function signatures. Works on mainnet and Sepolia.
 
 ```bash
 npx mantle-scan-contract 0x<address>
-npx mantle-scan-contract 0x<address> --abi          # include full ABI
-npx mantle-scan-contract 0x<address> --network sepolia --json
+npx mantle-scan-contract 0x<address> --network sepolia
+npx mantle-scan-contract 0x<address> --json
 ```
 
-Report name, verification status, and key functions.
+Report whether it's a contract, the bytecode size, and the detected functions.
 
 ## Output
 
-Contract name, verified/unverified, compiler, function signatures, optional ABI.
-Source: Mantlescan explorer API. **Requires a free `MANTLE_EXPLORER_API_KEY`** (verified-source ABI/metadata needs an indexer — not available over plain RPC).
+Is-contract flag, bytecode size, and detected functions (`selector → signature`).
+Source: Mantle JSON-RPC `eth_getCode` + 4byte.directory — **keyless, no API key**.
+Verified source/ABI metadata needs a Mantlescan key, but the on-chain bytecode
+truth (and its selectors) is keyless.
 
 ## Verification
 
-- Verification status is reported
-- For verified contracts, function signatures are listed
+- An EOA (no bytecode) is reported as "not a contract"
+- For a real contract, function selectors are extracted and (mostly) resolved to names
 
 ## Pitfalls
 
-- Unverified contracts return bytecode only — no ABI/signatures
+- Selector extraction is a bytecode heuristic — unresolved selectors are dropped; a
+  proxy may expose few of the implementation's functions
 - Pick the correct `--network`
