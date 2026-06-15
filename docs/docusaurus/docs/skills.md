@@ -104,8 +104,8 @@ Uses **Liquidity Book 2.2**. Contracts (Mantle mainnet): LB Quoter
 | Skill | CLI | Purpose |
 |-------|-----|---------|
 | `mantle-scan-tx` | `mantle-scan-tx` | Decode any transaction by hash |
-| `mantle-scan-contract` | `mantle-scan-contract` | Contract info, ABI, signatures |
-| `mantle-tx-history` | `mantle-tx-history` | Wallet tx history + gas summary |
+| `mantle-scan-contract` | `mantle-scan-contract` | Is-contract, bytecode size, function signatures (keyless RPC) |
+| `mantle-tx-history` | `mantle-tx-history` | Recent wallet activity + gas (keyless RPC) |
 | `mantle-whale-tracker` | `mantle-whale-tracker` | Large MNT transfers in recent blocks |
 
 ### Wallet (1)

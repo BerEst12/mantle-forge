@@ -27,17 +27,17 @@ The diagram flows left → right. Each column answers one question:
 | 7 📄 | `mantle-report` | Generates `FINAL_REPORT.md` — tests · gas · security · deploy · tx |
 
 ### Live DeFi data (center-right)
-**What it queries.** 19 skills for real-time Mantle market and on-chain data:
+**What it queries.** 19 skills for live Mantle data and cloud services (17 DeFi data + 2 Tencent Cloud):
 
 - **Prices & market** — MNT price, market cap, 24h volume, gas tracker
 - **TVL & protocols** — total Mantle TVL, per-protocol breakdown, yields, lending rates, mETH
-- **Merchant Moe DEX** — pools, yields, positions, swap quotes (on-chain via LBQuoter)
-- **Mantlescan explorer** — transactions, contracts, ABI, whale tracker, wallet history
-- **Bridges · Staking · Rewards** — cross-chain and staking data
+- **Merchant Moe DEX** — pools, best-pool, swap quotes (on-chain via LBQuoter)
+- **On-chain explorer** — transactions, contract inspection (functions), whale tracker, recent wallet activity (keyless via RPC)
+- **Wallet** — portfolio: native MNT + tokens/positions (Zerion optional)
 - **Tencent Cloud** — Hunyuan AI deep audit + COS artifact upload
 
 ### Mantle Sepolia (right)
-**Where it deploys and what it reads.** Chain ID 5003, MNT. RPC endpoint, Mantlescan explorer, deployed contracts (tx hash + address + source verified), deployer wallet. Also the external APIs: GeckoTerminal, DeFiLlama, Mantlescan API, Merchant Moe Subgraph, Tencent COS.
+**Where it deploys and what it reads.** Chain ID 5003, MNT. RPC endpoint, Mantlescan explorer, deployed contracts (tx hash + address + source verified), deployer wallet. Also the external APIs: GeckoTerminal, DeFiLlama, CoinGecko, DexScreener, Mantle RPC, Tencent COS.
 
 ## Design principles
 

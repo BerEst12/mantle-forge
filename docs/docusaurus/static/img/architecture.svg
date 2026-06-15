@@ -144,7 +144,7 @@
   <text x="700" y="233" text-anchor="middle" font-size="8" fill="#a07820">precios tokens · liquidez</text>
 
   <rect x="570" y="244" width="260" height="30" rx="5" fill="#1a1100" stroke="#5a4200" stroke-width="1"/>
-  <text x="700" y="263" text-anchor="middle" font-size="9" fill="#e8c040">🔍 Mantlescan: txs · contratos · ABI</text>
+  <text x="700" y="263" text-anchor="middle" font-size="9" fill="#e8c040">🔍 On-chain: txs · contratos · funciones</text>
 
   <rect x="570" y="280" width="260" height="30" rx="5" fill="#1a1100" stroke="#5a4200" stroke-width="1"/>
   <text x="700" y="299" text-anchor="middle" font-size="9" fill="#e8c040">🐋 Whale Tracker  ·  Top holders</text>
@@ -153,7 +153,7 @@
   <text x="700" y="335" text-anchor="middle" font-size="9" fill="#e8c040">⛽ Gas Tracker  ·  Historial tarifas</text>
 
   <rect x="570" y="352" width="260" height="30" rx="5" fill="#1a1100" stroke="#5a4200" stroke-width="1"/>
-  <text x="700" y="371" text-anchor="middle" font-size="9" fill="#e8c040">🌉 Bridges  ·  Staking  ·  Recompensas</text>
+  <text x="700" y="371" text-anchor="middle" font-size="9" fill="#e8c040">🌊 Yields · Lending · mETH · Wallet</text>
 
   <!-- Tencent -->
   <rect x="570" y="392" width="260" height="70" rx="5" fill="#140f00" stroke="#d4a017" stroke-width="1.5"/>
@@ -212,10 +212,10 @@
   <text x="930" y="419" text-anchor="middle" font-size="8" fill="#c89a00">DeFiLlama</text>
 
   <rect x="868" y="436" width="124" height="30" rx="4" fill="#100d00" stroke="#5a4200" stroke-width="1"/>
-  <text x="930" y="455" text-anchor="middle" font-size="8" fill="#c89a00">Mantlescan API</text>
+  <text x="930" y="455" text-anchor="middle" font-size="8" fill="#c89a00">Mantle RPC</text>
 
   <rect x="868" y="472" width="124" height="30" rx="4" fill="#100d00" stroke="#5a4200" stroke-width="1"/>
-  <text x="930" y="491" text-anchor="middle" font-size="8" fill="#c89a00">Moe Subgraph</text>
+  <text x="930" y="491" text-anchor="middle" font-size="8" fill="#c89a00">CoinGecko</text>
 
   <rect x="868" y="508" width="124" height="58" rx="4" fill="#0a0800" stroke="#d4a017" stroke-width="1.5"/>
   <text x="930" y="526" text-anchor="middle" font-size="8" fill="#d4a017" font-weight="700">Tencent Cloud</text>
