@@ -2,6 +2,8 @@
 id: roadmap
 title: Roadmap
 sidebar_label: Roadmap
+pagination_prev: null
+pagination_next: null
 ---
 
 # Roadmap
@@ -17,7 +19,7 @@ Mantle Forge is moving from a working hackathon prototype to a reliable Mantle d
 | Flagship workflow | One prompt → scaffold → tests → security review → gas analysis → deploy → final report |
 | Plugin system | Skills, commands, rules, and hooks for Hermes, Cursor, Codex, Claude Code, OpenClaw, OpenCode |
 | CLI toolchain | Deterministic CLI tools for scaffold, audit, harden, gas, deploy, scan, and report |
-| Tencent Cloud | Hunyuan second-opinion security audit + COS artifact publishing |
+| Tencent Cloud | Hunyuan second-opinion security review + COS artifact publishing |
 | DeFi data layer | Skills for prices, TVL, Merchant Moe, Mantlescan, wallet, and protocol data |
 | Team gateways | Discord and Telegram command surfaces |
 
@@ -27,7 +29,7 @@ One working end-to-end example: TokenVault deployed and verified on Mantle Sepol
 
 ## Q3 2026 — Stabilize
 
-- Publish a stable `npm` package (`npx mantle-forge`)
+- Publish a stable `npm` package — goal: `npx mantle-forge` works out of the box
 - Add a "try it in 10 minutes" quickstart with a real Sepolia deployment
 - Manual smoke tests and troubleshooting guides per runtime
 - Expand templates: `nft-minter`, `staking-vault`, `token-launcher`, `defi-vault`, `frontend-ready-dapp`
@@ -49,5 +51,7 @@ One working end-to-end example: TokenVault deployed and verified on Mantle Sepol
 Not building: another agent runtime · a professional audit replacement · a multi-chain toolkit before Mantle is solid · a heavy SaaS dashboard.
 
 ---
+
+The goal is simple: any developer building on Mantle should be able to go from idea to deployed, reviewed, and documented contract — in one session, with one prompt.
 
 **Agents orchestrate. Deterministic tools do the verifiable work. Mantle Forge connects both.**
