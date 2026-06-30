@@ -45,6 +45,7 @@ const config = {
           { to: "/docs/skills", label: "Skills", position: "left" },
           { to: "/docs/tools", label: "Tools", position: "left" },
           { to: "/docs/demo", label: "Demo", position: "left" },
+          { to: "/docs/roadmap", label: "Roadmap", position: "left" },
           {
             href: "https://github.com/BerEst12/mantle-forge",
             label: "GitHub",
