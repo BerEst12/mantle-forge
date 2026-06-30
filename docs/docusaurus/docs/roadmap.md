@@ -6,9 +6,16 @@ sidebar_label: Roadmap
 
 # Roadmap
 
-**Mantle Forge** is a Mantle-native plugin toolkit for coding agents — not another runtime. The goal is clear: give any coding agent the skills, tools, and workflows to go from natural-language intent to a tested, reviewed, gas-analyzed, and deployed Mantle project.
+Mantle Forge is moving from a working hackathon prototype to a reliable Mantle developer platform.
 
-This roadmap describes what ships today and where the project goes next.
+The next priorities are:
+
+- Productize the current workflow
+- Expand Mantle-ready templates
+- Strengthen the evidence layer
+- Improve team workflows
+
+We are not building another agent runtime. Mantle Forge gives existing coding agents a reliable Mantle execution layer.
 
 ---
 
@@ -18,12 +25,12 @@ The core workflow is live and reproducible.
 
 | Area | What was built |
 |------|----------------|
-| Flagship workflow | One prompt → scaffold → tests → security → gas → deploy → final report |
+| Flagship workflow | One prompt → scaffold → tests → agent-assisted security review → gas analysis → deploy → final report |
 | Plugin system | Skills, commands, rules, and hooks for Hermes, Cursor, Codex, Claude Code, OpenClaw, OpenCode |
-| CLI toolchain | 16 deterministic tools for scaffold, audit, harden, gas, deploy, scan, and report |
+| CLI toolchain | Deterministic CLI tools for scaffold, audit, harden, gas, deploy, scan, and report |
 | Hermes demo | Native Hermes-oriented workflow for the hackathon demo |
-| Tencent Cloud | Hunyuan second-opinion audit + COS artifact publishing |
-| DeFi data layer | 17 skills for prices, TVL, Merchant Moe, Mantlescan, wallet, and protocol data |
+| Tencent Cloud | Hunyuan second-opinion security audit + COS artifact publishing |
+| DeFi data layer | Skills for prices, TVL, Merchant Moe, Mantlescan, wallet, and protocol data |
 | Team gateways | Discord and Telegram command surfaces |
 | Documentation | Public docs, architecture, plugin guides, and reproducible demo materials |
 
@@ -37,16 +44,12 @@ The Q3 focus is not more scope. It is making the current prototype easier to ins
 
 ### Productize onboarding
 
-Right now the first-run experience requires too much prior knowledge.
-
 - Publish a stable `npm` package so `npx mantle-forge` works out of the box
 - Improve setup error messages so failures point to a fix, not a stack trace
 - Add a "try it in 10 minutes" quickstart that ends with a real Sepolia deployment
-- Add reproducible demo recipes with expected output so contributors and evaluators can validate the workflow
+- Add reproducible demo recipes with expected output
 
 ### Harden runtime integrations
-
-The install scripts exist. The next step is better validation inside each runtime UI.
 
 - Manual smoke tests for Cursor, Codex, Claude Code, OpenClaw, and OpenCode
 - Runtime-specific troubleshooting guides for the most common failure modes
@@ -73,12 +76,10 @@ Not every user starts from scratch. The "harden an existing project" workflow sh
 
 - Detect existing Hardhat or Foundry structure automatically
 - Add Mantle Sepolia config where it is missing, without overwriting what is there
-- Run security and gas checks without touching the project structure
+- Run agent-assisted security review and measured gas reports without touching the project structure
 - Generate a migration-oriented `FINAL_REPORT.md`
 
 ### Polish Mantlescan verification
-
-The deploy → verify loop should feel complete, not like a manual last step.
 
 - Clear documentation for the verify flow after deployment
 - Better fallback messages when explorer verification times out
@@ -98,8 +99,6 @@ A minimal view of what happened during a run — no heavy SaaS, just visibility.
 - Transaction hashes and Mantlescan links per run
 - Security and gas summaries in one place
 
-The dashboard should not become a product before the execution layer is solid. Lightweight first.
-
 ### MCP server
 
 Expose Mantle Forge tools through a standard interface that works beyond vendor-specific plugin formats.
@@ -112,23 +111,7 @@ Expose Mantle Forge tools through a standard interface that works beyond vendor-
 
 The current workflow uses one agent for everything. Splitting responsibilities produces cleaner artifacts.
 
-Planned roles:
-- **Builder** — scaffold and write
-- **Security reviewer** — static analysis, fuzz, triage
-- **Gas analyst** — measurement and optimization suggestions
-- **Deployment operator** — deploy, verify, capture artifacts
-- **Report generator** — collect and format outputs
-
-The goal is better artifacts, not agent theater.
-
-### Team-ready gateways
-
-Discord and Telegram already work as command surfaces. The next step is making them useful for teams.
-
-- Permissions per user or role
-- Shared run history and artifacts
-- Review logs accessible to the full team
-- Confirmation step before any deploy-related action
+Planned roles: **Builder** · **Security reviewer** · **Gas analyst** · **Deployment operator** · **Report generator**
 
 ### Distribution
 
@@ -141,27 +124,22 @@ Discord and Telegram already work as command surfaces. The next step is making t
 
 ## Longer-Term Direction
 
-Mantle Forge should become the default execution layer for coding agents building on Mantle.
-
 Areas under consideration (not committed):
 
 - Mainnet-ready deployment workflows with stronger safety gates
-- Regression testing across template updates
+- Gas regression tests across template updates
 - Partner integrations for audits, storage, monitoring, and on-chain verification
 - Template packs for common Mantle DeFi and NFT patterns
-- Enterprise workflows for agencies, hackathon teams, and protocol developers
 
 ---
 
 ## Non-Goals
 
-Staying focused matters more than adding scope.
-
 Mantle Forge is **not** building:
 
 - A custom agent runtime
 - A generic multi-chain toolkit before Mantle is solid
-- A professional audit replacement
+- A replacement for professional security audits — the security layer is agent-assisted review and hardening, not an audit firm
 - A chat-only assistant
 - A heavy SaaS dashboard before the execution layer is reliable
 - A closed platform that forces developers off their existing tools
