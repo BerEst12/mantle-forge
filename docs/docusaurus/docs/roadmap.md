@@ -52,6 +52,6 @@ Not building: another agent runtime · a professional audit replacement · a mul
 
 ---
 
-The goal is simple: any developer building on Mantle should be able to go from idea to deployed, reviewed, and documented contract — in one session, with one prompt.
+The goal is simple: any developer building on Mantle should be able to go from idea to deployed, security-reviewed, and documented contract — in one session, with one prompt.
 
 **Agents orchestrate. Deterministic tools do the verifiable work. Mantle Forge connects both.**
